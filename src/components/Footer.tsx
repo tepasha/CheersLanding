@@ -73,11 +73,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms, onOp
                 </a>
               </li>
               <li>
-                <a href="#venues" className="hover:text-amber-400 transition-colors">
-                  Заклади-партнери
-                </a>
-              </li>
-              <li>
                 <a href="#safety" className="hover:text-amber-400 transition-colors">
                   Безпека та приватність
                 </a>

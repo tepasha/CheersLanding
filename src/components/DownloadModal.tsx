@@ -12,8 +12,18 @@ interface DownloadModalProps {
 export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, defaultPlatform }) => {
   const [apkDownloading, setApkDownloading] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.href);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
+
+  const testUrl = currentUrl || 'https://ais-dev-aemnx6jeaemtjlv3jjgfnv-747705824020.europe-west2.run.app';
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(testUrl)}&color=000000&bgcolor=ffffff&margin=5`;
 
   const handleDownloadApk = () => {
     playCelebrationPop();
@@ -60,10 +70,12 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
 
         {/* Desktop QR Scan Section */}
         <div className="bg-[#0a0a0c] border border-zinc-800 rounded-2xl p-5 mb-6 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-          <div className="w-24 h-24 bg-white p-2 rounded-xl shrink-0 flex items-center justify-center shadow-md">
-            <svg viewBox="0 0 32 32" className="w-full h-full text-zinc-950" fill="currentColor">
-              <path d="M2 2h10v10H2V2zm2 2v6h6V4H4zm14-2h10v10H18V2zm2 2v6h6V4h-6zM2 18h10v10H2V18zm2 2v6h6v-6H4zm14 0h3v3h-3v-3zm7 0h3v3h-3v-3zm-7 7h3v3h-3v-3zm7 0h3v3h-3v-3zm-3-3h3v3h-3v-3zm-11-7h2v2H6v-2zm16 2h2v2h-2v-2zM6 6h2v2H6V6zm16 0h2v2h-2V6zM6 22h2v2H6v-2z" />
-            </svg>
+          <div className="w-24 h-24 bg-white p-1.5 rounded-xl shrink-0 flex items-center justify-center shadow-md overflow-hidden">
+            <img
+              src={qrCodeUrl}
+              alt="QR код для встановлення"
+              className="w-full h-full object-contain"
+            />
           </div>
           <div>
             <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-0.5">
@@ -73,7 +85,7 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
               Наведи камеру смартфона
             </h4>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Відкриває додаток на iOS або Android миттєво без пошуку в магазинах.
+              Відкриває веб-версію або пропонує встановлення на iOS та Android миттєво.
             </p>
           </div>
         </div>

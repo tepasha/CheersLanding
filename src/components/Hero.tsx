@@ -14,7 +14,14 @@ import {
   Wine,
   Coffee,
   Beer,
-  ArrowRight
+  ArrowRight,
+  Link2,
+  ExternalLink,
+  Navigation,
+  Plus,
+  Minus,
+  Map as MapIcon,
+  Crosshair
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playGlassClink } from '../utils/audio';
@@ -22,12 +29,25 @@ import { playGlassClink } from '../utils/audio';
 interface HeroProps {
   onOpenWebApp: () => void;
   onOpenDownload: (platform?: string) => void;
+  onOpenTestLink: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpenTestLink }) => {
   const [toastCount, setToastCount] = useState(148);
   const [hasToasted, setHasToasted] = useState(false);
   const [activePersonTooltip, setActivePersonTooltip] = useState<string | null>('p1');
+  const [selectedMapFilter, setSelectedMapFilter] = useState<'all' | 'beer' | 'coffee' | 'wine'>('all');
+  const [mapZoom, setMapZoom] = useState(1);
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
+
+  const testUrl = currentUrl || 'https://ais-dev-aemnx6jeaemtjlv3jjgfnv-747705824020.europe-west2.run.app';
+  const qrCodeImg = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(testUrl)}&color=000000&bgcolor=ffffff&margin=5`;
 
   const triggerToast = (e: React.MouseEvent) => {
     playGlassClink();
@@ -74,15 +94,28 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
           {/* Left Column: Conversion Copy & CTA */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* Live Pill badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-700/80 shadow-inner mb-6 backdrop-blur-md">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-              <span className="text-xs font-medium text-zinc-200">
-                Зараз у твоєму районі шукають компанію <strong className="text-amber-400 font-semibold">38 людей</strong>
-              </span>
+            {/* Live Pill badge and Test Link Quick Badge */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-700/80 shadow-inner backdrop-blur-md">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-xs font-medium text-zinc-200">
+                  Зараз у твоєму районі шукають компанію <strong className="text-amber-400 font-semibold">38 людей</strong>
+                </span>
+              </div>
+
+              <button
+                onClick={onOpenTestLink}
+                id="hero-quick-test-link-btn"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 hover:text-amber-200 text-xs font-semibold transition-all shadow-sm group"
+                title="Отримати тестове посилання"
+              >
+                <Link2 className="w-3.5 h-3.5 text-amber-400 group-hover:rotate-45 transition-transform" />
+                <span>Тестове посилання</span>
+                <span className="text-[10px] text-amber-400/80 bg-amber-500/20 px-1.5 py-0.5 rounded-md">Live</span>
+              </button>
             </div>
 
             {/* Main Headline */}
@@ -183,18 +216,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
             
             {/* Desktop QR Scan Widget floating badge */}
-            <div className="hidden xl:flex absolute -left-12 bottom-12 z-30 bg-[#141419]/95 border border-zinc-700/80 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md items-center gap-3.5 max-w-[230px]">
-              <div className="w-14 h-14 bg-white p-1 rounded-xl flex items-center justify-center shrink-0 shadow-inner">
-                {/* Visual SVG QR representation */}
-                <svg viewBox="0 0 32 32" className="w-full h-full text-zinc-950" fill="currentColor">
-                  <path d="M2 2h10v10H2V2zm2 2v6h6V4H4zm14-2h10v10H18V2zm2 2v6h6V4h-6zM2 18h10v10H2V18zm2 2v6h6v-6H4zm14 0h3v3h-3v-3zm7 0h3v3h-3v-3zm-7 7h3v3h-3v-3zm7 0h3v3h-3v-3zm-3-3h3v3h-3v-3zm-11-7h2v2H6v-2zm16 2h2v2h-2v-2zM6 6h2v2H6V6zm16 0h2v2h-2V6zM6 22h2v2H6v-2z" />
-                </svg>
+            <button
+              onClick={onOpenTestLink}
+              title="Натисніть для відкриття тестового посилання"
+              className="hidden xl:flex absolute -left-12 bottom-12 z-30 bg-[#141419]/95 border border-zinc-700/80 hover:border-amber-500/60 rounded-2xl p-3 shadow-2xl backdrop-blur-md items-center gap-3.5 max-w-[240px] text-left transition-all hover:scale-105 active:scale-95 group cursor-pointer"
+            >
+              <div className="w-14 h-14 bg-white p-1 rounded-xl flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
+                <img
+                  src={qrCodeImg}
+                  alt="QR код для тестування"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="text-[11px] leading-tight text-zinc-300">
-                <p className="font-semibold text-white mb-0.5">Відкрий на телефоні</p>
-                <p className="text-zinc-400">Наведи камеру для миттєвого тесту</p>
+                <p className="font-semibold text-white mb-0.5 group-hover:text-amber-400 transition-colors flex items-center gap-1">
+                  <span>Відкрий на телефоні</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-amber-400" />
+                </p>
+                <p className="text-zinc-400">Наведи камеру або клікни для посилання</p>
               </div>
-            </div>
+            </button>
 
             {/* Smartphone Container Frame */}
             <div className="relative w-[310px] sm:w-[340px] h-[640px] bg-[#121216] rounded-[44px] p-3 shadow-2xl shadow-black/80 border-[5px] border-zinc-800 ring-1 ring-zinc-700/50">
@@ -220,158 +261,394 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                 </div>
 
                 {/* In-App Header */}
-                <div className="px-4 py-2 flex items-center justify-between z-20 border-b border-zinc-800/40 mt-1">
+                <div className="px-3.5 py-2 flex items-center justify-between z-20 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/70 mt-1">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span className="text-xs font-bold font-display tracking-tight text-amber-400">
-                      Будьмо! Радар
+                    <span className="text-xs font-bold font-display tracking-tight text-amber-400 flex items-center gap-1">
+                      <MapIcon className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Будьмо! Карта</span>
                     </span>
                   </div>
-                  <div className="text-[10px] bg-zinc-800/80 px-2 py-0.5 rounded-full text-zinc-300 border border-zinc-700/60">
-                    Радіус: 1.5 км
+                  <div className="flex items-center gap-1 text-[10px] bg-zinc-900/90 px-2 py-0.5 rounded-full text-zinc-300 border border-zinc-700/60">
+                    <MapPin className="w-2.5 h-2.5 text-amber-400" />
+                    <span>Поділ • 1.5 км</span>
                   </div>
                 </div>
 
-                {/* Radar Stage View */}
-                <div className="relative flex-1 flex items-center justify-center overflow-hidden">
+                {/* Map Stage View */}
+                <div className="relative flex-1 overflow-hidden bg-[#0a0d14] flex flex-col">
                   
-                  {/* Concentric Radar Rings */}
-                  <div className="absolute w-64 h-64 rounded-full border border-zinc-800/70" />
-                  <div className="absolute w-48 h-48 rounded-full border border-zinc-800/80" />
-                  <div className="absolute w-32 h-32 rounded-full border border-amber-500/20" />
-                  <div className="absolute w-16 h-16 rounded-full border border-amber-500/40" />
+                  {/* Floating Map Filter Pills */}
+                  <div className="absolute top-2.5 left-2.5 right-2.5 z-20 flex items-center gap-1.5 overflow-x-auto no-scrollbar pointer-events-auto">
+                    {[
+                      { id: 'all', label: 'Всі (18)' },
+                      { id: 'beer', label: '🍺 Крафт' },
+                      { id: 'coffee', label: '☕️ Кава' },
+                      { id: 'wine', label: '🍷 Вино' },
+                    ].map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setSelectedMapFilter(tab.id as any)}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-semibold whitespace-nowrap backdrop-blur-md transition-all shadow-sm ${
+                          selectedMapFilter === tab.id
+                            ? 'bg-amber-500 text-zinc-950 font-bold shadow-amber-500/20'
+                            : 'bg-zinc-900/80 text-zinc-300 hover:text-white border border-zinc-700/60'
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
 
-                  {/* Pulsing radar waves */}
-                  <div className="absolute w-56 h-56 rounded-full bg-amber-500/5 animate-ping-slow pointer-events-none" />
-
-                  {/* Rotating sweep line */}
-                  <div className="absolute w-64 h-64 rounded-full pointer-events-none animate-radar">
-                    <div 
-                      className="w-1/2 h-1/2 origin-bottom-right"
-                      style={{
-                        background: 'conic-gradient(from 180deg at 100% 100%, rgba(245, 158, 11, 0.28) 0deg, rgba(245, 158, 11, 0) 65deg)',
+                  {/* Floating Map Controls (Zoom & Re-center) */}
+                  <div className="absolute right-2.5 top-14 z-20 flex flex-col gap-1">
+                    <button
+                      onClick={() => setMapZoom((prev) => Math.min(prev + 0.15, 1.4))}
+                      title="Наблизити"
+                      className="w-7 h-7 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/70 text-zinc-200 flex items-center justify-center text-xs shadow-md transition-colors"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => setMapZoom((prev) => Math.max(prev - 0.15, 0.85))}
+                      title="Віддалити"
+                      className="w-7 h-7 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/70 text-zinc-200 flex items-center justify-center text-xs shadow-md transition-colors"
+                    >
+                      <Minus className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        setMapZoom(1);
+                        setActivePersonTooltip(null);
                       }}
-                    />
+                      title="Моє місцезнаходження"
+                      className="w-7 h-7 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-400 flex items-center justify-center text-xs shadow-md transition-colors mt-1"
+                    >
+                      <Crosshair className="w-3.5 h-3.5" />
+                    </button>
                   </div>
 
-                  {/* Central User Marker */}
-                  <div className="relative z-20 flex flex-col items-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 p-0.5 shadow-lg shadow-amber-500/40 flex items-center justify-center">
-                      <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center text-lg">
-                        🍺
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-bold text-amber-300 mt-1 bg-zinc-900/90 px-2 py-0.5 rounded-full border border-amber-500/30">
-                      Ти (Поділ)
-                    </span>
+                  {/* Scale Badge */}
+                  <div className="absolute bottom-2 left-2.5 z-20 bg-zinc-950/80 border border-zinc-800/80 px-2 py-0.5 rounded text-[9px] font-mono text-zinc-400 flex items-center gap-1 backdrop-blur-sm pointer-events-none">
+                    <span className="w-4 h-[1px] bg-zinc-400 inline-block" />
+                    <span>100 м</span>
                   </div>
 
-                  {/* Person 1: Orest */}
+                  {/* Vector Map Canvas (Podil, Kyiv) */}
                   <div 
-                    onClick={() => setActivePersonTooltip('p1')}
-                    className="absolute top-12 left-10 z-20 cursor-pointer group transition-transform hover:scale-110"
+                    className="absolute inset-0 w-full h-full transition-transform duration-300 origin-center"
+                    style={{ transform: `scale(${mapZoom})` }}
                   >
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-full border-2 border-amber-400 overflow-hidden shadow-lg shadow-black">
-                        <img 
-                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" 
-                          alt="Орест"
-                          className="w-full h-full object-cover"
-                        />
+                    <svg
+                      className="w-full h-full"
+                      viewBox="0 0 340 420"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      {/* Dark Map Base */}
+                      <rect width="340" height="420" fill="#0c0f17" />
+
+                      {/* City Urban Blocks */}
+                      <rect x="15" y="40" width="70" height="60" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      <rect x="95" y="40" width="80" height="45" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      <rect x="185" y="40" width="65" height="55" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      
+                      <rect x="15" y="115" width="65" height="75" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      <rect x="90" y="100" width="75" height="70" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      <rect x="175" y="110" width="70" height="85" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+
+                      <rect x="15" y="205" width="75" height="80" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      <rect x="100" y="185" width="70" height="65" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+                      <rect x="180" y="210" width="75" height="80" rx="6" fill="#131722" stroke="#1b2130" strokeWidth="1" />
+
+                      {/* Kontraktova Square (Historic plaza) */}
+                      <polygon
+                        points="105,175 165,175 170,225 95,225"
+                        fill="#181e2b"
+                        stroke="#f59e0b"
+                        strokeWidth="1"
+                        strokeDasharray="3 3"
+                        opacity="0.6"
+                      />
+
+                      {/* Dnipro River (River bend along east) */}
+                      <path
+                        d="M 270 0 C 275 90, 260 170, 275 260 C 290 330, 270 380, 285 420 L 340 420 L 340 0 Z"
+                        fill="#0e1726"
+                        stroke="#1e2a3d"
+                        strokeWidth="1.5"
+                      />
+                      {/* River water ripples */}
+                      <path d="M 285 80 Q 295 85 305 80" stroke="#1e293b" strokeWidth="1.5" fill="none" />
+                      <path d="M 290 190 Q 300 195 310 190" stroke="#1e293b" strokeWidth="1.5" fill="none" />
+                      <path d="M 295 310 Q 305 315 315 310" stroke="#1e293b" strokeWidth="1.5" fill="none" />
+
+                      {/* Green Hill slope (Zamkova Hora / Andrew's Descent slopes) */}
+                      <path
+                        d="M 0 310 C 35 300, 60 340, 85 365 C 105 385, 110 410, 115 420 L 0 420 Z"
+                        fill="#0c1813"
+                        stroke="#142c20"
+                        strokeWidth="1"
+                      />
+
+                      {/* Street Network Paths */}
+                      {/* Verkhnii & Nyzhnii Val (broad parallel avenues) */}
+                      <line x1="0" y1="95" x2="265" y2="95" stroke="#334155" strokeWidth="5" strokeLinecap="round" />
+                      <line x1="0" y1="108" x2="265" y2="108" stroke="#334155" strokeWidth="5" strokeLinecap="round" />
+                      {/* Tram tracks in between Valy */}
+                      <line x1="0" y1="101.5" x2="265" y2="101.5" stroke="#475569" strokeWidth="1" strokeDasharray="2 3" />
+
+                      {/* Spaska & Horyva streets */}
+                      <line x1="0" y1="195" x2="270" y2="195" stroke="#1e2638" strokeWidth="4" />
+                      <line x1="0" y1="295" x2="275" y2="295" stroke="#1e2638" strokeWidth="4" />
+
+                      {/* Petra Sahaidachnoho (Pedestrian boulevard with warm lighting) */}
+                      <line x1="135" y1="225" x2="245" y2="350" stroke="#f59e0b" strokeWidth="5" strokeOpacity="0.45" strokeLinecap="round" />
+                      <line x1="135" y1="225" x2="245" y2="350" stroke="#fbbf24" strokeWidth="2.5" strokeOpacity="0.8" strokeLinecap="round" />
+
+                      {/* Andriivskyi Uzviz (Winding historic street) */}
+                      <path
+                        d="M 115 225 Q 75 270, 60 320 T 45 420"
+                        stroke="#475569"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                        strokeDasharray="4 2"
+                        fill="none"
+                      />
+
+                      {/* Naberezhno-Khreshchatytska along the river */}
+                      <path
+                        d="M 268 0 C 273 90, 258 170, 273 260 C 288 330, 268 380, 283 420"
+                        stroke="#334155"
+                        strokeWidth="4.5"
+                        fill="none"
+                      />
+
+                      {/* Street Names Labels */}
+                      <text x="75" y="325" fill="#64748b" fontSize="7.5" fontWeight="600" letterSpacing="0.08em" transform="rotate(-62 75 325)">
+                        АНДРІЇВСЬКИЙ УЗВІЗ
+                      </text>
+                      <text x="165" y="275" fill="#f59e0b" fontSize="7.5" fontWeight="700" letterSpacing="0.08em" transform="rotate(48 165 275)" opacity="0.9">
+                        ВУЛ. САГАЙДАЧНОГО
+                      </text>
+                      <text x="35" y="91" fill="#64748b" fontSize="7" fontWeight="600" letterSpacing="0.05em">
+                        ВЕРХНІЙ ВАЛ
+                      </text>
+                      <text x="35" y="119" fill="#64748b" fontSize="7" fontWeight="600" letterSpacing="0.05em">
+                        НИЖНІЙ ВАЛ
+                      </text>
+                      <text x="108" y="195" fill="#94a3b8" fontSize="7.5" fontWeight="700" letterSpacing="0.05em">
+                        КОНТРАКТОВА ПЛ.
+                      </text>
+                      <text x="295" y="130" fill="#38bdf8" fontSize="7.5" fontWeight="600" letterSpacing="0.1em" opacity="0.6" transform="rotate(75 295 130)">
+                        Р. ДНІПРО
+                      </text>
+
+                      {/* Metro Icon */}
+                      <circle cx="118" cy="180" r="4.5" fill="#10b981" />
+                      <text x="116" y="182.5" fill="#ffffff" fontSize="6.5" fontWeight="900" fontFamily="sans-serif">M</text>
+                    </svg>
+
+                    {/* YOU: Central GPS User Location Marker */}
+                    <div className="absolute top-[48%] left-[45%] -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center pointer-events-none">
+                      {/* Pulsing GPS Walking Accuracy Aura (200m) */}
+                      <div className="absolute w-28 h-28 rounded-full bg-amber-500/10 border border-amber-400/30 animate-ping-slow pointer-events-none" />
+                      <div className="absolute w-20 h-20 rounded-full bg-amber-500/15 border border-amber-400/40 pointer-events-none" />
+                      
+                      {/* Center User Pin */}
+                      <div className="relative flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 p-0.5 shadow-xl shadow-amber-500/50 ring-2 ring-zinc-950">
+                          <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center text-sm">
+                            🍺
+                          </div>
+                        </div>
+                        <span className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-zinc-950" />
                       </div>
-                      <span className="absolute -bottom-1 -right-1 text-xs bg-zinc-900 rounded-full p-0.5 border border-zinc-700">
-                        🍺
+
+                      <span className="mt-1 text-[9px] font-bold text-amber-300 bg-zinc-950/95 px-2 py-0.5 rounded-full border border-amber-500/40 shadow-md whitespace-nowrap">
+                        Ти (Контрактова)
                       </span>
                     </div>
 
-                    {/* Tooltip */}
-                    {activePersonTooltip === 'p1' && (
-                      <div className="absolute left-10 -top-6 w-40 bg-zinc-900/95 border border-amber-500/50 rounded-xl p-2 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150">
-                        <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
-                          <span>Орест, 27</span>
-                          <span className="text-[9px] text-amber-400 font-semibold">300м</span>
+                    {/* Person 1: Орест (вул. Сагайдачного) */}
+                    {(selectedMapFilter === 'all' || selectedMapFilter === 'beer') && (
+                      <div 
+                        onClick={() => setActivePersonTooltip(activePersonTooltip === 'p1' ? null : 'p1')}
+                        className="absolute top-[62%] left-[64%] z-20 cursor-pointer group transition-transform hover:scale-110"
+                        title="Орест, 27 • вул. Сагайдачного"
+                      >
+                        <div className="relative">
+                          <div className={`w-10 h-10 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
+                            activePersonTooltip === 'p1' ? 'border-amber-400 ring-4 ring-amber-400/30 scale-105' : 'border-amber-500/80 ring-1 ring-zinc-900'
+                          }`}>
+                            <img 
+                              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80" 
+                              alt="Орест"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="absolute -bottom-1 -right-1 text-[11px] bg-zinc-900 rounded-full p-0.5 border border-zinc-700 shadow-sm">
+                            🍺
+                          </span>
                         </div>
-                        <p className="text-[10px] text-zinc-300 leading-tight">
-                          «Шукаю компанію на крафтову IPA»
-                        </p>
+
+                        {/* Distance Label below pin */}
+                        <div className="mt-1 -ml-2 text-[9px] font-bold text-zinc-200 bg-zinc-900/90 border border-zinc-700/80 px-1.5 py-0.2 rounded-md shadow-md text-center whitespace-nowrap">
+                          300 м
+                        </div>
+
+                        {/* Detailed Tooltip */}
+                        {activePersonTooltip === 'p1' && (
+                          <div className="absolute -left-20 -top-16 w-44 bg-zinc-900/95 border border-amber-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-30">
+                            <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
+                              <span>Орест, 27</span>
+                              <span className="text-[9px] text-amber-400 font-semibold">вул. Сагайдачного</span>
+                            </div>
+                            <p className="text-[10px] text-zinc-300 leading-tight">
+                              «Шукаю компанію на крафтову IPA»
+                            </p>
+                          </div>
+                        )}
                       </div>
                     )}
-                  </div>
 
-                  {/* Person 2: Olena */}
-                  <div 
-                    onClick={() => setActivePersonTooltip('p2')}
-                    className="absolute bottom-16 right-8 z-20 cursor-pointer group transition-transform hover:scale-110"
-                  >
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-full border-2 border-emerald-400 overflow-hidden shadow-lg shadow-black">
-                        <img 
-                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80" 
-                          alt="Олена"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <span className="absolute -bottom-1 -right-1 text-xs bg-zinc-900 rounded-full p-0.5 border border-zinc-700">
-                        ☕️
-                      </span>
-                    </div>
-
-                    {/* Tooltip */}
-                    {activePersonTooltip === 'p2' && (
-                      <div className="absolute right-10 -top-6 w-38 bg-zinc-900/95 border border-emerald-500/50 rounded-xl p-2 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150">
-                        <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
-                          <span>Олена, 25</span>
-                          <span className="text-[9px] text-emerald-400 font-semibold">150м</span>
+                    {/* Person 2: Олена (Контрактова площа) */}
+                    {(selectedMapFilter === 'all' || selectedMapFilter === 'coffee') && (
+                      <div 
+                        onClick={() => setActivePersonTooltip(activePersonTooltip === 'p2' ? null : 'p2')}
+                        className="absolute top-[32%] left-[46%] z-20 cursor-pointer group transition-transform hover:scale-110"
+                        title="Олена, 25 • Контрактова пл."
+                      >
+                        <div className="relative">
+                          <div className={`w-9 h-9 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
+                            activePersonTooltip === 'p2' ? 'border-emerald-400 ring-4 ring-emerald-400/30 scale-105' : 'border-emerald-500/80 ring-1 ring-zinc-900'
+                          }`}>
+                            <img 
+                              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80" 
+                              alt="Олена"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="absolute -bottom-1 -right-1 text-[11px] bg-zinc-900 rounded-full p-0.5 border border-zinc-700 shadow-sm">
+                            ☕️
+                          </span>
                         </div>
-                        <p className="text-[10px] text-zinc-300 leading-tight">
-                          «Пʼю спешелті лате, сумую»
-                        </p>
+
+                        <div className="mt-1 -ml-1 text-[9px] font-bold text-emerald-300 bg-zinc-900/90 border border-zinc-700/80 px-1.5 py-0.2 rounded-md shadow-md text-center whitespace-nowrap">
+                          150 м
+                        </div>
+
+                        {activePersonTooltip === 'p2' && (
+                          <div className="absolute -left-12 -top-16 w-42 bg-zinc-900/95 border border-emerald-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-30">
+                            <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
+                              <span>Олена, 25</span>
+                              <span className="text-[9px] text-emerald-400 font-semibold">One Love Coffee</span>
+                            </div>
+                            <p className="text-[10px] text-zinc-300 leading-tight">
+                              «Пʼю спешелті лате, сумую»
+                            </p>
+                          </div>
+                        )}
                       </div>
                     )}
-                  </div>
 
-                  {/* Person 3: Solomiya */}
-                  <div 
-                    onClick={() => setActivePersonTooltip('p3')}
-                    className="absolute top-20 right-8 z-20 cursor-pointer group transition-transform hover:scale-110"
-                  >
-                    <div className="relative">
-                      <div className="w-9 h-9 rounded-full border-2 border-rose-400 overflow-hidden shadow-lg">
-                        <img 
-                          src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&auto=format&fit=crop&q=80" 
-                          alt="Соломія"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <span className="absolute -bottom-1 -right-1 text-[10px] bg-zinc-900 rounded-full p-0.5 border border-zinc-700">
-                        🍷
-                      </span>
-                    </div>
-
-                    {activePersonTooltip === 'p3' && (
-                      <div className="absolute right-9 -top-4 w-36 bg-zinc-900/95 border border-rose-500/50 rounded-xl p-2 shadow-2xl backdrop-blur-md">
-                        <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
-                          <span>Соломія, 26</span>
-                          <span className="text-[9px] text-rose-400 font-semibold">220м</span>
+                    {/* Person 3: Соломія (Андріївський узвіз) */}
+                    {(selectedMapFilter === 'all' || selectedMapFilter === 'wine') && (
+                      <div 
+                        onClick={() => setActivePersonTooltip(activePersonTooltip === 'p3' ? null : 'p3')}
+                        className="absolute top-[68%] left-[16%] z-20 cursor-pointer group transition-transform hover:scale-110"
+                        title="Соломія, 26 • Андріївський узвіз"
+                      >
+                        <div className="relative">
+                          <div className={`w-9 h-9 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
+                            activePersonTooltip === 'p3' ? 'border-rose-400 ring-4 ring-rose-400/30 scale-105' : 'border-rose-500/80 ring-1 ring-zinc-900'
+                          }`}>
+                            <img 
+                              src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&auto=format&fit=crop&q=80" 
+                              alt="Соломія"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="absolute -bottom-1 -right-1 text-[10px] bg-zinc-900 rounded-full p-0.5 border border-zinc-700 shadow-sm">
+                            🍷
+                          </span>
                         </div>
-                        <p className="text-[10px] text-zinc-300 leading-tight">
-                          «Келих вина на терасі»
-                        </p>
+
+                        <div className="mt-1 -ml-1 text-[9px] font-bold text-rose-300 bg-zinc-900/90 border border-zinc-700/80 px-1.5 py-0.2 rounded-md shadow-md text-center whitespace-nowrap">
+                          220 м
+                        </div>
+
+                        {activePersonTooltip === 'p3' && (
+                          <div className="absolute left-1 -top-16 w-42 bg-zinc-900/95 border border-rose-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md z-30">
+                            <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
+                              <span>Соломія, 26</span>
+                              <span className="text-[9px] text-rose-400 font-semibold">Андріївський</span>
+                            </div>
+                            <p className="text-[10px] text-zinc-300 leading-tight">
+                              «Келих вина на терасі»
+                            </p>
+                          </div>
+                        )}
                       </div>
                     )}
+
+                    {/* Person 4: Дмитро (вул. Нижній Вал) */}
+                    {(selectedMapFilter === 'all' || selectedMapFilter === 'beer') && (
+                      <div 
+                        onClick={() => setActivePersonTooltip(activePersonTooltip === 'p4' ? null : 'p4')}
+                        className="absolute top-[18%] left-[60%] z-20 cursor-pointer group transition-transform hover:scale-110"
+                        title="Дмитро, 29 • вул. Нижній Вал"
+                      >
+                        <div className="relative">
+                          <div className={`w-8 h-8 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
+                            activePersonTooltip === 'p4' ? 'border-cyan-400 ring-4 ring-cyan-400/30 scale-105' : 'border-cyan-500/80 ring-1 ring-zinc-900'
+                          }`}>
+                            <img 
+                              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" 
+                              alt="Дмитро"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="absolute -bottom-1 -right-1 text-[10px] bg-zinc-900 rounded-full p-0.5 border border-zinc-700 shadow-sm">
+                            🍸
+                          </span>
+                        </div>
+
+                        <div className="mt-1 -ml-1 text-[9px] font-bold text-cyan-300 bg-zinc-900/90 border border-zinc-700/80 px-1.5 py-0.2 rounded-md shadow-md text-center whitespace-nowrap">
+                          380 м
+                        </div>
+
+                        {activePersonTooltip === 'p4' && (
+                          <div className="absolute -left-20 -top-16 w-40 bg-zinc-900/95 border border-cyan-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md z-30">
+                            <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
+                              <span>Дмитро, 29</span>
+                              <span className="text-[9px] text-cyan-400 font-semibold">Нижній Вал</span>
+                            </div>
+                            <p className="text-[10px] text-zinc-300 leading-tight">
+                              «Затишний бар, хто поруч?»
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                   </div>
 
                 </div>
 
                 {/* Bottom Interactive Toast Action Area */}
-                <div className="p-4 bg-zinc-900/95 border-t border-zinc-800 z-20 flex flex-col gap-2">
+                <div className="p-3.5 bg-zinc-900/95 border-t border-zinc-800 z-20 flex flex-col gap-2">
                   <div className="flex items-center justify-between text-[11px]">
-                    <span className="text-zinc-400 flex items-center gap-1">
-                      <Flame className="w-3 h-3 text-amber-400" />
-                      Підтверджено тостів сьогодні:
+                    <span className="text-zinc-300 flex items-center gap-1 truncate font-medium">
+                      <Flame className="w-3 h-3 text-amber-400 shrink-0" />
+                      {activePersonTooltip === 'p1' && 'Орест • Крафтова IPA (300 м)'}
+                      {activePersonTooltip === 'p2' && 'Олена • Спешелті кава (150 м)'}
+                      {activePersonTooltip === 'p3' && 'Соломія • Келих вина (220 м)'}
+                      {activePersonTooltip === 'p4' && 'Дмитро • Коктейлі (380 м)'}
+                      {!activePersonTooltip && '18 людей поруч готові випити'}
                     </span>
-                    <span className="font-bold text-amber-400 font-display">
-                      {toastCount}
+                    <span className="font-bold text-amber-400 font-display text-xs shrink-0">
+                      {toastCount} тостів
                     </span>
                   </div>
 
@@ -382,15 +659,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                     className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 shadow-md ${
                       hasToasted
                         ? 'bg-emerald-500 text-zinc-950 scale-102 ring-2 ring-emerald-300'
-                        : 'bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-zinc-950'
+                        : 'bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-yellow-300 text-zinc-950'
                     }`}
                   >
                     <span className="text-sm">🥂</span>
-                    <span>{hasToasted ? 'Дзинь! +1 тост у районі' : 'Натисни «Дзинь!» для тесту'}</span>
+                    <span>
+                      {hasToasted 
+                        ? 'Дзинь! +1 тост на Подолі' 
+                        : activePersonTooltip 
+                          ? 'Чокнемось «Дзинь!» з обраним 🍻' 
+                          : 'Натисни «Дзинь!» для тесту'
+                      }
+                    </span>
                   </button>
 
                   <p className="text-[9px] text-center text-zinc-400">
-                    Натисни на аватар або кнопку тосту для перевірки реакції
+                    Клікни на піни на карті або кнопку тосту для звуку та ефекту
                   </p>
                 </div>
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, 
-  MapPin, 
-  Star, 
   Share2, 
   Copy, 
   Check, 
@@ -10,24 +8,22 @@ import {
   Flame, 
   RefreshCw, 
   ShieldCheck, 
-  Gift, 
   GlassWater,
   Beer,
   Wine,
   Coffee,
-  HeartHandshake,
-  Navigation
+  HeartHandshake
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { PARTNER_BARS, UKRAINIAN_TOASTS } from '../data/mockData';
-import { ToastItem, PartnerBar } from '../types';
+import { UKRAINIAN_TOASTS } from '../data/mockData';
+import { ToastItem } from '../types';
 import { playGlassClink, playCelebrationPop } from '../utils/audio';
 
 interface FeaturesShowcaseProps {
-  onOpenPartnerModal: () => void;
+  onOpenPartnerModal?: () => void;
 }
 
-export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = ({ onOpenPartnerModal }) => {
+export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
   // Clink Toast sandbox state
   const [clinkCount, setClinkCount] = useState(12);
   const [clinkAnim, setClinkAnim] = useState(false);
@@ -36,10 +32,6 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = ({ onOpenPartne
   const [currentToastIndex, setCurrentToastIndex] = useState(0);
   const [selectedToastCategory, setSelectedToastCategory] = useState<string>('all');
   const [copiedToast, setCopiedToast] = useState(false);
-
-  // Partner bars filter state
-  const [selectedCity, setSelectedCity] = useState<'Всі' | 'Київ' | 'Львів' | 'Одеса'>('Всі');
-  const [selectedBarType, setSelectedBarType] = useState<string>('all');
 
   // "Тут і зараз" countdown simulation
   const [minutesRemaining, setMinutesRemaining] = useState(48);
@@ -88,12 +80,6 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = ({ onOpenPartne
     setCopiedToast(true);
     setTimeout(() => setCopiedToast(false), 2500);
   };
-
-  const filteredBars = PARTNER_BARS.filter((bar) => {
-    const matchCity = selectedCity === 'Всі' || bar.city === selectedCity;
-    const matchType = selectedBarType === 'all' || bar.category === selectedBarType;
-    return matchCity && matchType;
-  });
 
   return (
     <section id="features" className="py-20 md:py-28 bg-[#0a0a0c] relative">
@@ -239,125 +225,7 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = ({ onOpenPartne
 
         </div>
 
-        {/* FEATURE 2: 🗺️ Інтерактивна карта партнерських барів зі спешлами */}
-        <div id="venues" className="bg-[#121216] border border-zinc-800 rounded-3xl p-6 sm:p-10 mb-16 shadow-xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold mb-3">
-                <MapPin className="w-3.5 h-3.5" />
-                <span>Мережа партнерів</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white font-display">
-                Перевірені заклади зі спешлами
-              </h3>
-              <p className="text-sm text-zinc-400 mt-1 max-w-xl">
-                Зустрічайтеся у найкращих міських просторах із приємними бонусами для комʼюніті «Будьмо!».
-              </p>
-            </div>
-
-            {/* City Tabs */}
-            <div className="flex items-center gap-1.5 p-1 bg-[#0b0b0e] rounded-xl border border-zinc-800 self-start md:self-auto">
-              {(['Всі', 'Київ', 'Львів', 'Одеса'] as const).map((city) => (
-                <button
-                  key={city}
-                  onClick={() => setSelectedCity(city)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    selectedCity === city
-                      ? 'bg-amber-500 text-zinc-950 shadow-sm'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  {city}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Bar Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredBars.map((bar) => (
-              <div
-                key={bar.id}
-                className="bg-[#0b0b0e] border border-zinc-800 hover:border-amber-500/40 rounded-2xl overflow-hidden transition-all duration-300 group flex flex-col justify-between shadow-md"
-              >
-                <div>
-                  {/* Photo with Overlay Badges */}
-                  <div className="relative h-44 w-full overflow-hidden">
-                    <img
-                      src={bar.image}
-                      alt={bar.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0e] via-transparent to-black/30" />
-                    
-                    <div className="absolute top-3 left-3 flex gap-2">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-zinc-900/90 text-amber-400 border border-zinc-700/80 backdrop-blur-sm">
-                        {bar.type}
-                      </span>
-                    </div>
-
-                    <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-zinc-900/90 text-white border border-zinc-700/80">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      <span>{bar.rating}</span>
-                    </div>
-
-                    <div className="absolute bottom-3 left-3 text-xs text-zinc-300 flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                      <span>{bar.city}, {bar.district}</span>
-                    </div>
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="p-5">
-                    <h4 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors font-display mb-1">
-                      {bar.name}
-                    </h4>
-                    <p className="text-xs text-zinc-400 mb-3">{bar.address}</p>
-
-                    {/* Specials */}
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-1.5 rounded-lg">
-                        <Gift className="w-3.5 h-3.5 shrink-0" />
-                        <span>{bar.discountText}</span>
-                      </div>
-                      <p className="text-[11px] text-zinc-400 leading-snug">
-                        💡 {bar.specialOffer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-5 pt-0 flex items-center justify-between border-t border-zinc-800/60 mt-2 text-xs text-zinc-400">
-                  <span>Працює {bar.openUntil}</span>
-                  <span className="text-amber-400 font-medium group-hover:translate-x-0.5 transition-transform">
-                    Показати в додатку →
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Become a partner banner link */}
-          <div className="mt-8 p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 font-bold text-lg">
-                📍
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-bold text-white">Маєте бар, паб або кавʼярню?</p>
-                <p className="text-xs text-zinc-400">Приєднуйтесь до мережі закладів «Будьмо!» та отримуйте нові компанії гостей щодня.</p>
-              </div>
-            </div>
-            <button
-              onClick={onOpenPartnerModal}
-              className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 hover:text-white border border-zinc-700 transition-colors whitespace-nowrap"
-            >
-              Стати закладом-партнером
-            </button>
-          </div>
-        </div>
-
-        {/* FEATURE 3: 🎭 Генератор українських тостів (Interactive Widget) */}
+        {/* FEATURE 2: 🎭 Генератор українських тостів (Interactive Widget) */}
         <div id="toasts" className="bg-gradient-to-br from-[#121216] via-[#15151c] to-[#0e0e12] border border-amber-500/20 rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
           
           {/* Subtle warm decorative glow */}
