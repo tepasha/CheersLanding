@@ -1,0 +1,6 @@
+{
+  "name": "Будьмо! — Пошук компанії на вечір поруч",
+  "description": "Сучасний промо-лендінг українського додатку «Будьмо!» (Budmo) для швидкого та безпечного пошуку компанії на вечір у барах та кав'ярнях за інтересами.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
