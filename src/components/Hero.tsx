@@ -3,20 +3,14 @@ import {
   Sparkles, 
   Smartphone, 
   Download, 
-  ShieldCheck, 
-  Star, 
   Compass, 
   MapPin, 
-  QrCode, 
   CheckCircle2, 
-  Users, 
   Flame,
   Wine,
   Coffee,
   Beer,
   ArrowRight,
-  Link2,
-  ExternalLink,
   Navigation,
   Plus,
   Minus,
@@ -38,16 +32,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
   const [activePersonTooltip, setActivePersonTooltip] = useState<string | null>('p1');
   const [selectedMapFilter, setSelectedMapFilter] = useState<'all' | 'beer' | 'coffee' | 'wine'>('all');
   const [mapZoom, setMapZoom] = useState(1);
-  const [currentUrl, setCurrentUrl] = useState('');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.href);
-    }
-  }, []);
-
-  const testUrl = currentUrl || 'https://ais-dev-aemnx6jeaemtjlv3jjgfnv-747705824020.europe-west2.run.app';
-  const qrCodeImg = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(testUrl)}&color=000000&bgcolor=ffffff&margin=5`;
 
   const triggerToast = (e: React.MouseEvent) => {
     playGlassClink();
@@ -93,30 +77,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
           
           {/* Left Column: Conversion Copy & CTA */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            
-            {/* Live Pill badge and Test Link Quick Badge */}
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-700/80 shadow-inner backdrop-blur-md">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
-                <span className="text-xs font-medium text-zinc-200">
-                  Зараз у твоєму районі шукають компанію <strong className="text-amber-400 font-semibold">38 людей</strong>
-                </span>
-              </div>
-
-              <button
-                onClick={onOpenTestLink}
-                id="hero-quick-test-link-btn"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 hover:text-amber-200 text-xs font-semibold transition-all shadow-sm group"
-                title="Отримати тестове посилання"
-              >
-                <Link2 className="w-3.5 h-3.5 text-amber-400 group-hover:rotate-45 transition-transform" />
-                <span>Тестове посилання</span>
-                <span className="text-[10px] text-amber-400/80 bg-amber-500/20 px-1.5 py-0.5 rounded-md">Live</span>
-              </button>
-            </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] mb-6 font-display">
@@ -154,89 +114,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
               </button>
             </div>
 
-            {/* App Store / Google Play / Direct APK Badges */}
-            <div className="flex flex-wrap items-center gap-2.5 mb-8">
-              <button
-                onClick={() => onOpenDownload('ios')}
-                className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-2 transition-colors"
-                title="Завантажити для iPhone"
-              >
-                <span className="text-base"></span>
-                <span>App Store</span>
-              </button>
-
-              <button
-                onClick={() => onOpenDownload('android')}
-                className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-2 transition-colors"
-                title="Завантажити в Google Play"
-              >
-                <span className="text-emerald-400 font-bold">▶</span>
-                <span>Google Play</span>
-              </button>
-
-              <button
-                onClick={() => onOpenDownload('apk')}
-                className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-2 transition-colors"
-                title="Пряме завантаження APK для Android"
-              >
-                <Download className="w-3.5 h-3.5 text-amber-400" />
-                <span>Direct APK (Швидко)</span>
-              </button>
-            </div>
-
-            {/* Social Proof Stats Bar */}
-            <div className="pt-6 border-t border-zinc-800/90 w-full flex flex-wrap items-center gap-6 sm:gap-8 text-xs sm:text-sm text-zinc-400">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center text-amber-400">
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                </div>
-                <span className="text-zinc-200 font-bold">4.9</span>
-                <span className="text-zinc-400">в маркетах</span>
-              </div>
-
-              <div className="flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-emerald-400" />
-                <span className="text-zinc-200 font-semibold">12,000+</span>
-                <span>успішних зустрічей</span>
-              </div>
-
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span className="text-zinc-200 font-medium">100% публічні місця</span>
-              </div>
-            </div>
-
           </div>
 
           {/* Right Column: Interactive Smartphone Mockup with Live Radar */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
             
-            {/* Desktop QR Scan Widget floating badge */}
-            <button
-              onClick={onOpenTestLink}
-              title="Натисніть для відкриття тестового посилання"
-              className="hidden xl:flex absolute -left-12 bottom-12 z-30 bg-[#141419]/95 border border-zinc-700/80 hover:border-amber-500/60 rounded-2xl p-3 shadow-2xl backdrop-blur-md items-center gap-3.5 max-w-[240px] text-left transition-all hover:scale-105 active:scale-95 group cursor-pointer"
-            >
-              <div className="w-14 h-14 bg-white p-1 rounded-xl flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
-                <img
-                  src={qrCodeImg}
-                  alt="QR код для тестування"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="text-[11px] leading-tight text-zinc-300">
-                <p className="font-semibold text-white mb-0.5 group-hover:text-amber-400 transition-colors flex items-center gap-1">
-                  <span>Відкрий на телефоні</span>
-                  <ExternalLink className="w-2.5 h-2.5 text-amber-400" />
-                </p>
-                <p className="text-zinc-400">Наведи камеру або клікни для посилання</p>
-              </div>
-            </button>
-
             {/* Smartphone Container Frame */}
             <div className="relative w-[310px] sm:w-[340px] h-[640px] bg-[#121216] rounded-[44px] p-3 shadow-2xl shadow-black/80 border-[5px] border-zinc-800 ring-1 ring-zinc-700/50">
               

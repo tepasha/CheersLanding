@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { X, Smartphone, Download, QrCode, CheckCircle2, ShieldCheck, Sparkles, ArrowDownToLine } from 'lucide-react';
-import confetti from 'canvas-confetti';
-import { playCelebrationPop } from '../utils/audio';
+import { X, Smartphone, Download, QrCode, CheckCircle2, ShieldCheck, Sparkles, ExternalLink } from 'lucide-react';
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -10,8 +8,6 @@ interface DownloadModalProps {
 }
 
 export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, defaultPlatform }) => {
-  const [apkDownloading, setApkDownloading] = useState(false);
-  const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
 
   React.useEffect(() => {
@@ -24,23 +20,6 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
 
   const testUrl = currentUrl || 'https://ais-dev-aemnx6jeaemtjlv3jjgfnv-747705824020.europe-west2.run.app';
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(testUrl)}&color=000000&bgcolor=ffffff&margin=5`;
-
-  const handleDownloadApk = () => {
-    playCelebrationPop();
-    setApkDownloading(true);
-
-    confetti({
-      particleCount: 40,
-      spread: 60,
-      origin: { x: 0.5, y: 0.5 },
-      colors: ['#f59e0b', '#10b981', '#ffffff'],
-    });
-
-    setTimeout(() => {
-      setApkDownloading(false);
-      setDownloadSuccess(true);
-    }, 1500);
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
@@ -64,7 +43,7 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
             Завантажити «Будьмо!»
           </h3>
           <p className="text-xs sm:text-sm text-zinc-400">
-            Обирай зручний спосіб встановлення для iOS, Android або швидкий запуск PWA.
+            Завантажуйте виключно через офіційні магазини додатків Apple App Store та Google Play.
           </p>
         </div>
 
@@ -79,72 +58,62 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
           </div>
           <div>
             <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-0.5">
-              Швидкий QR-код
+              Швидкий перехід
             </span>
             <h4 className="text-sm font-bold text-white mb-1">
               Наведи камеру смартфона
             </h4>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Відкриває веб-версію або пропонує встановлення на iOS та Android миттєво.
+              Відкриває офіційну сторінку завантаження у відповідному магазині вашого смартфона.
             </p>
           </div>
         </div>
 
-        {/* Platform Buttons */}
-        <div className="space-y-2.5 mb-6">
+        {/* Official Store Buttons */}
+        <div className="space-y-3 mb-6">
           <a
             href="https://apple.com/app-store"
             target="_blank"
             rel="noreferrer"
-            className="w-full p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-850 transition-colors flex items-center justify-between"
+            className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-amber-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-2xl"></span>
+            <div className="flex items-center gap-3.5">
+              <span className="text-3xl group-hover:scale-110 transition-transform"></span>
               <div className="text-left">
-                <p className="text-[10px] text-zinc-400 leading-none">Завантажити в</p>
-                <p className="text-sm font-bold text-white">Apple App Store (iOS)</p>
+                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">Офіційний магазин</p>
+                <p className="text-base font-bold text-white">Apple App Store (iOS)</p>
               </div>
             </div>
-            <span className="text-xs text-amber-400 font-semibold">Отримати →</span>
+            <span className="text-xs text-amber-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+              <span>Завантажити</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </span>
           </a>
 
           <a
             href="https://play.google.com"
             target="_blank"
             rel="noreferrer"
-            className="w-full p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-850 transition-colors flex items-center justify-between"
+            className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-emerald-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-emerald-400 text-xl font-bold">▶</span>
+            <div className="flex items-center gap-3.5">
+              <span className="text-emerald-400 text-2xl font-bold group-hover:scale-110 transition-transform">▶</span>
               <div className="text-left">
-                <p className="text-[10px] text-zinc-400 leading-none">Доступно в</p>
-                <p className="text-sm font-bold text-white">Google Play Store (Android)</p>
+                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">Офіційний магазин</p>
+                <p className="text-base font-bold text-white">Google Play Store (Android)</p>
               </div>
             </div>
-            <span className="text-xs text-amber-400 font-semibold">Отримати →</span>
-          </a>
-
-          <button
-            onClick={handleDownloadApk}
-            className="w-full p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/15 transition-colors flex items-center justify-between text-left"
-          >
-            <div className="flex items-center gap-3">
-              <ArrowDownToLine className="w-5 h-5 text-amber-400 shrink-0" />
-              <div>
-                <p className="text-[10px] text-amber-400 font-semibold leading-none">Прямий файл без посередників</p>
-                <p className="text-sm font-bold text-white">Пряме завантаження APK v2.4.0</p>
-              </div>
-            </div>
-            <span className="text-xs text-amber-400 font-bold">
-              {apkDownloading ? 'Завантаження...' : downloadSuccess ? 'Готово ✓' : 'Завантажити APK (32 MB)'}
+            <span className="text-xs text-emerald-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+              <span>Завантажити</span>
+              <ExternalLink className="w-3.5 h-3.5" />
             </span>
-          </button>
+          </a>
         </div>
 
         {/* Security verification notice */}
         <div className="flex items-center justify-center gap-2 text-xs text-zinc-400 pt-2 border-t border-zinc-800">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Перевірено на віруси та підписано цифровим сертифікатом</span>
+          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>Перевірено системами безпеки Apple App Store та Google Play Protect</span>
         </div>
 
       </div>

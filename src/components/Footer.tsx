@@ -1,5 +1,5 @@
 import React from 'react';
-import { Send, Github, Shield, FileText, Heart, Smartphone, ArrowUp } from 'lucide-react';
+import { Shield, FileText, Smartphone, ArrowUp } from 'lucide-react';
 
 interface FooterProps {
   onOpenPrivacy: () => void;
@@ -29,31 +29,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms, onOp
               </span>
             </div>
 
-            <p className="text-zinc-400 leading-relaxed text-xs mb-6 max-w-sm">
+            <p className="text-zinc-400 leading-relaxed text-xs max-w-sm">
               Український сервіс швидкого та безпечного пошуку компанії на вечір біля дому, у крафтових пабах та затишних кавʼярнях за улюбленими напоями та інтересами.
             </p>
-
-            <div className="flex items-center gap-3">
-              <a
-                href="https://t.me"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-300 hover:text-white hover:border-amber-500/50 transition-colors"
-                title="Telegram Спільнота"
-              >
-                <Send className="w-4 h-4" />
-              </a>
-
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-300 hover:text-white hover:border-amber-500/50 transition-colors"
-                title="GitHub Репозиторій релізів"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Col 2: Navigation Links */}
@@ -113,11 +91,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms, onOp
                   <FileText className="w-3.5 h-3.5 text-zinc-400" />
                   <span>Умови використання (Terms)</span>
                 </button>
-              </li>
-              <li>
-                <a href="https://t.me" target="_blank" rel="noreferrer" className="hover:text-amber-400 transition-colors">
-                  Звʼязатися з модератором 24/7
-                </a>
               </li>
               <li>
                 <a href="#safety" className="hover:text-amber-400 transition-colors">

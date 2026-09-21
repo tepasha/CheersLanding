@@ -4,7 +4,6 @@ import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
 import { FeaturesShowcase } from './components/FeaturesShowcase';
 import { SafetySection } from './components/SafetySection';
-import { ReviewsSection } from './components/ReviewsSection';
 import { FaqSection } from './components/FaqSection';
 import { CtaBanner } from './components/CtaBanner';
 import { Footer } from './components/Footer';
@@ -67,10 +66,7 @@ export default function App() {
         {/* 5. Safety & Trust (Verification, Public Venues, Fuzzy Location, Moderation) */}
         <SafetySection />
 
-        {/* 6. Real User Stories & Testimonials */}
-        <ReviewsSection />
-
-        {/* 7. Frequently Asked Questions Accordion */}
+        {/* 6. Frequently Asked Questions Accordion */}
         <FaqSection />
 
         {/* 8. Conversion Booster Call-to-Action Banner */}
