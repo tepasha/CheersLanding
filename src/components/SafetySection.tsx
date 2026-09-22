@@ -6,8 +6,7 @@ import {
   AlertOctagon, 
   CheckCircle2, 
   EyeOff,
-  Building2,
-  ThumbsUp
+  Building2
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -159,28 +158,19 @@ export const SafetySection: React.FC = () => {
         </div>
 
         {/* Community Code Banner */}
-        <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-zinc-900 to-amber-950/20 border border-emerald-800/30 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
-              🤝
-            </div>
-            <div>
-              <h4 className="text-base font-bold text-white font-display">
-                {language === 'uk' ? 'Маніфест взаємоповаги «Будьмо!»' : 'Budmo Courtesy & Respect Manifesto'}
-              </h4>
-              <p className="text-xs text-zinc-300 max-w-2xl">
-                {language === 'uk' 
-                  ? 'Ми обʼєднуємо відкритих, культурних та привітних людей. Повага до особистих кордонів, гостинність і дружня атмосфера — фундаментальні правила кожного тосту.'
-                  : 'We bring together open, cultured, and welcoming people. Respect for boundaries, hospitality, and a friendly atmosphere are fundamental rules of every cheers.'}
-              </p>
-            </div>
+        <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-zinc-900 to-amber-950/20 border border-emerald-800/30 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+            🤝
           </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs font-semibold text-emerald-400 bg-emerald-950 px-3 py-1.5 rounded-xl border border-emerald-800/50 flex items-center gap-1.5">
-              <ThumbsUp className="w-3.5 h-3.5" />
-              <span>{language === 'uk' ? '99.4% позитивних відгуків' : '99.4% positive ratings'}</span>
-            </span>
+          <div>
+            <h4 className="text-base font-bold text-white font-display">
+              {language === 'uk' ? 'Маніфест взаємоповаги «Будьмо!»' : 'Budmo Courtesy & Respect Manifesto'}
+            </h4>
+            <p className="text-xs text-zinc-300 max-w-3xl">
+              {language === 'uk' 
+                ? 'Ми обʼєднуємо відкритих, культурних та привітних людей. Повага до особистих кордонів, гостинність і дружня атмосфера — фундаментальні правила кожного тосту.'
+                : 'We bring together open, cultured, and welcoming people. Respect for boundaries, hospitality, and a friendly atmosphere are fundamental rules of every cheers.'}
+            </p>
           </div>
         </div>
 
