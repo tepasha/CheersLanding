@@ -5,21 +5,14 @@ import {
   MapPin, 
   MessageSquare, 
   User, 
-  Sparkles, 
   Send, 
-  CheckCheck, 
   ShieldCheck, 
-  Flame, 
-  Beer, 
-  Coffee, 
-  Wine, 
-  ChevronRight,
   Download
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { NEARBY_PEOPLE, PARTNER_BARS } from '../data/mockData';
-import { NearbyPerson } from '../types';
 import { playGlassClink, playCelebrationPop } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
 
 interface WebAppModalProps {
   isOpen: boolean;
@@ -28,13 +21,31 @@ interface WebAppModalProps {
 }
 
 export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpenDownload }) => {
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'radar' | 'bars' | 'chat' | 'profile'>('radar');
-  const [selectedPerson, setSelectedPerson] = useState<NearbyPerson | null>(NEARBY_PEOPLE[0]);
   const [invitedPersons, setInvitedPersons] = useState<Record<string, boolean>>({});
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'them' | 'me'; text: string; time: string }>>([
-    { sender: 'them', text: 'Привіт! Бачу тебе на радарі «Будьмо». Пʼєш зараз крафт?', time: '20:12' },
-    { sender: 'me', text: 'Привіт! Так, саме шукаю компанію на Поділ, вільний на годинку 🍻', time: '20:14' },
-    { sender: 'them', text: 'Чудово! Якраз біля RePublic Pub. Займаю столик на вулиці, підходь!', time: '20:15' }
+    { 
+      sender: 'them', 
+      text: language === 'uk' 
+        ? 'Привіт! Бачу тебе на радарі «Будьмо». Пʼєш зараз крафт?' 
+        : 'Hey! Spotted you on Budmo radar. Having craft beer right now?', 
+      time: '20:12' 
+    },
+    { 
+      sender: 'me', 
+      text: language === 'uk' 
+        ? 'Привіт! Так, саме шукаю компанію на Поділ, вільний на годинку 🍻' 
+        : 'Hey! Yes, looking for companions around Podil for an hour 🍻', 
+      time: '20:14' 
+    },
+    { 
+      sender: 'them', 
+      text: language === 'uk' 
+        ? 'Чудово! Якраз біля RePublic Pub. Займаю столик на вулиці, підходь!' 
+        : 'Awesome! Right outside RePublic Pub. Grabbing a terrace table, join me!', 
+      time: '20:15' 
+    }
   ]);
   const [chatInput, setChatInput] = useState('');
   const [pwaInstalled, setPwaInstalled] = useState(false);
@@ -65,7 +76,13 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
     setTimeout(() => {
       setChatMessages((prev) => [
         ...prev,
-        { sender: 'them' as const, text: 'Супер, чекаю! Тисну «Дзинь!» при зустрічі 🥂', time: '20:19' }
+        { 
+          sender: 'them' as const, 
+          text: language === 'uk' 
+            ? 'Супер, чекаю! Тисну «Дзинь!» при зустрічі 🥂' 
+            : 'Super, see you there! Clinking glasses upon arrival 🥂', 
+          time: '20:19' 
+        }
       ]);
     }, 1200);
   };
@@ -84,7 +101,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
             </div>
             <div>
               <h3 className="text-sm font-bold font-display tracking-tight text-white flex items-center gap-1.5">
-                Будьмо! Web App (PWA)
+                {language === 'uk' ? 'Будьмо! Web App (PWA)' : 'Budmo! Web App (PWA)'}
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.2 rounded font-mono">
                   LIVE
                 </span>
@@ -101,12 +118,12 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
               className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[11px] font-semibold text-amber-400 border border-zinc-700 flex items-center gap-1"
             >
               <Download className="w-3 h-3" />
-              <span>Встановити</span>
+              <span>{language === 'uk' ? 'Встановити' : 'Install'}</span>
             </button>
             <button
               onClick={onClose}
               className="p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-              aria-label="Закрити модалку"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -127,10 +144,12 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                   </span>
-                  <span className="font-semibold text-zinc-200">Поділ, Київ (Радіус 1.5 км)</span>
+                  <span className="font-semibold text-zinc-200">
+                    {language === 'uk' ? 'Поділ, Київ (Радіус 1.5 км)' : 'Podil, Kyiv (Radius 1.5 km)'}
+                  </span>
                 </div>
                 <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
-                  {NEARBY_PEOPLE.length} людей поруч
+                  {NEARBY_PEOPLE.length} {language === 'uk' ? 'людей поруч' : 'people nearby'}
                 </span>
               </div>
 
@@ -152,7 +171,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                               className="w-12 h-12 rounded-full object-cover border-2 border-amber-400/60"
                             />
                             {person.verified && (
-                              <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center text-[10px] text-zinc-950 font-bold" title="Верифіковано Дія">
+                              <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center text-[10px] text-zinc-950 font-bold" title="Verified">
                                 ✓
                               </span>
                             )}
@@ -164,7 +183,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                                 {person.name}, {person.age}
                               </h4>
                               <span className="text-[10px] text-zinc-400">
-                                • {person.distanceMeters}м
+                                • {person.distanceMeters}m
                               </span>
                             </div>
                             <p className="text-xs text-amber-400/90 font-medium">
@@ -200,11 +219,11 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                       >
                         {isInvited ? (
                           <>
-                            <span>✓ Запрошення надіслано!</span>
+                            <span>✓ {language === 'uk' ? 'Запрошення надіслано!' : 'Invitation sent!'}</span>
                           </>
                         ) : (
                           <>
-                            <span>🍻 Запросити на келих / каву</span>
+                            <span>🍻 {language === 'uk' ? 'Запросити на келих / каву' : 'Invite for a drink / coffee'}</span>
                           </>
                         )}
                       </button>
@@ -220,7 +239,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
           {activeTab === 'bars' && (
             <div className="p-4 space-y-3">
               <div className="p-3 bg-zinc-900/80 rounded-2xl border border-zinc-800 text-xs text-zinc-300">
-                <span>📍 Партнерські заклади зі спешлами для «Будьмо!»</span>
+                <span>📍 {language === 'uk' ? 'Партнерські заклади зі спешлами для «Будьмо!»' : 'Partner venues with specials for Budmo!'}</span>
               </div>
 
               {PARTNER_BARS.map((bar) => (
@@ -260,14 +279,16 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
               <div className="flex items-center gap-2.5 pb-3 border-b border-zinc-800">
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80"
-                  alt="Орест"
+                  alt="Orest"
                   className="w-9 h-9 rounded-full object-cover border border-amber-400"
                 />
                 <div>
-                  <h4 className="text-xs font-bold text-white font-display">Орест (Поділ)</h4>
+                  <h4 className="text-xs font-bold text-white font-display">
+                    {language === 'uk' ? 'Орест (Поділ)' : 'Orest (Podil)'}
+                  </h4>
                   <span className="text-[10px] text-emerald-400 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Онлайн біля RePublic Pub
+                    {language === 'uk' ? 'Онлайн біля RePublic Pub' : 'Online near RePublic Pub'}
                   </span>
                 </div>
               </div>
@@ -295,7 +316,10 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
 
               {/* Quick Reply Pills */}
               <div className="flex items-center gap-1.5 overflow-x-auto pb-2 text-[10px]">
-                {['Я вже тут!', 'Замовляю тобі лате? ☕️', 'Тисну «Дзинь!» 🥂'].map((pill) => (
+                {(language === 'uk' 
+                  ? ['Я вже тут!', 'Замовляю тобі лате? ☕️', 'Тисну «Дзинь!» 🥂']
+                  : ['I am here!', 'Ordering you a latte? ☕️', 'Clinking glasses! 🥂']
+                ).map((pill) => (
                   <button
                     key={pill}
                     onClick={() => handleSendMessage(pill)}
@@ -310,7 +334,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
               <div className="pt-2 border-t border-zinc-800 flex items-center gap-2">
                 <input
                   type="text"
-                  placeholder="Напишіть повідомлення..."
+                  placeholder={language === 'uk' ? 'Напишіть повідомлення...' : 'Type a message...'}
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
@@ -319,7 +343,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                 <button
                   onClick={() => handleSendMessage()}
                   className="p-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 transition-colors"
-                  aria-label="Надіслати повідомлення"
+                  aria-label="Send message"
                 >
                   <Send className="w-4 h-4" />
                 </button>
@@ -335,26 +359,30 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                 <div className="w-16 h-16 rounded-full bg-amber-500/20 border-2 border-amber-400 mx-auto mb-3 flex items-center justify-center text-2xl">
                   🍺
                 </div>
-                <h4 className="text-base font-bold text-white font-display">Твій профіль у «Будьмо!»</h4>
-                <p className="text-xs text-zinc-400 mb-2">Статус: Готовий до зустрічі сьогодні</p>
+                <h4 className="text-base font-bold text-white font-display">
+                  {language === 'uk' ? 'Твій профіль у «Будьмо!»' : 'Your Profile in Budmo!'}
+                </h4>
+                <p className="text-xs text-zinc-400 mb-2">
+                  {language === 'uk' ? 'Статус: Готовий до зустрічі сьогодні' : 'Status: Ready to meet tonight'}
+                </p>
                 <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-800">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  Верифіковано через Дія
+                  {language === 'uk' ? 'Верифіковано через Дія' : 'Verified Profile'}
                 </span>
               </div>
 
               <div className="space-y-2 text-xs">
                 <div className="p-3 bg-[#121216] border border-zinc-800 rounded-xl flex justify-between">
-                  <span className="text-zinc-400">Улюблений напій:</span>
-                  <span className="font-bold text-amber-400">Craft IPA / Сидр</span>
+                  <span className="text-zinc-400">{language === 'uk' ? 'Улюблений напій:' : 'Favorite Drink:'}</span>
+                  <span className="font-bold text-amber-400">Craft IPA / Cider</span>
                 </div>
                 <div className="p-3 bg-[#121216] border border-zinc-800 rounded-xl flex justify-between">
-                  <span className="text-zinc-400">Рейтинг ввічливості:</span>
-                  <span className="font-bold text-emerald-400">⭐️ 5.0 (14 відгуків)</span>
+                  <span className="text-zinc-400">{language === 'uk' ? 'Рейтинг ввічливості:' : 'Courtesy Rating:'}</span>
+                  <span className="font-bold text-emerald-400">⭐️ 5.0 (14 reviews)</span>
                 </div>
                 <div className="p-3 bg-[#121216] border border-zinc-800 rounded-xl flex justify-between">
-                  <span className="text-zinc-400">Захист геопозиції:</span>
-                  <span className="font-bold text-emerald-400">Активно (Fuzzy Mode)</span>
+                  <span className="text-zinc-400">{language === 'uk' ? 'Захист геопозиції:' : 'Location Guard:'}</span>
+                  <span className="font-bold text-emerald-400">{language === 'uk' ? 'Активно (Fuzzy Mode)' : 'Active (Fuzzy Mode)'}</span>
                 </div>
               </div>
 
@@ -365,7 +393,9 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                 }}
                 className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-yellow-300 text-zinc-950 font-bold text-xs shadow-md transition-all"
               >
-                {pwaInstalled ? '✓ Додано на головний екран смартфона!' : 'Додати PWA на головний екран смартфона'}
+                {pwaInstalled 
+                  ? (language === 'uk' ? '✓ Додано на головний екран смартфона!' : '✓ Added to phone home screen!') 
+                  : (language === 'uk' ? 'Додати PWA на головний екран смартфона' : 'Add PWA to home screen')}
               </button>
             </div>
           )}
@@ -381,7 +411,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
             }`}
           >
             <Radio className="w-4 h-4" />
-            <span className="text-[10px]">Радар</span>
+            <span className="text-[10px]">{language === 'uk' ? 'Радар' : 'Radar'}</span>
           </button>
 
           <button
@@ -391,7 +421,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
             }`}
           >
             <MapPin className="w-4 h-4" />
-            <span className="text-[10px]">Заклади</span>
+            <span className="text-[10px]">{language === 'uk' ? 'Заклади' : 'Venues'}</span>
           </button>
 
           <button
@@ -401,7 +431,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
             }`}
           >
             <MessageSquare className="w-4 h-4" />
-            <span className="text-[10px]">Чати</span>
+            <span className="text-[10px]">{language === 'uk' ? 'Чати' : 'Chats'}</span>
             <span className="absolute top-1.5 right-6 w-2 h-2 rounded-full bg-emerald-500" />
           </button>
 
@@ -412,7 +442,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
             }`}
           >
             <User className="w-4 h-4" />
-            <span className="text-[10px]">Профіль</span>
+            <span className="text-[10px]">{language === 'uk' ? 'Профіль' : 'Profile'}</span>
           </button>
         </div>
 

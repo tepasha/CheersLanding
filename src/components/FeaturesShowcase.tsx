@@ -1,29 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, 
-  Share2, 
   Copy, 
   Check, 
   Clock, 
   Flame, 
   RefreshCw, 
-  ShieldCheck, 
-  GlassWater,
-  Beer,
-  Wine,
-  Coffee,
-  HeartHandshake
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { UKRAINIAN_TOASTS } from '../data/mockData';
 import { ToastItem } from '../types';
 import { playGlassClink, playCelebrationPop } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FeaturesShowcaseProps {
   onOpenPartnerModal?: () => void;
 }
 
+const ENGLISH_TOASTS: ToastItem[] = [
+  {
+    id: 'en-1',
+    category: 'friends',
+    title: 'To True Friends',
+    text: 'May our glasses always be full, our stories endless, and the laughter around this table genuine. To great company!',
+    tag: '#Friends',
+  },
+  {
+    id: 'en-2',
+    category: 'victory',
+    title: 'To Freedom & Resilience',
+    text: 'To resilience, courage, unbreakable spirit, and peaceful skies. Slava Ukraini!',
+    tag: '#Victory',
+  },
+  {
+    id: 'en-3',
+    category: 'tech',
+    title: 'To Bug-Free Deploys',
+    text: 'May your production servers stay up on Fridays, PRs get approved without bike-shedding, and coffee flow uninterrupted. Cheers!',
+    tag: '#Tech',
+  },
+  {
+    id: 'en-4',
+    category: 'love',
+    title: 'To Moments That Warm Us',
+    text: 'To looking into eyes that smile back, to shared adventures and warm hugs on cold evenings.',
+    tag: '#Love',
+  },
+  {
+    id: 'en-5',
+    category: 'philosophical',
+    title: 'To Being Present',
+    text: 'Life happens right now in the spaces between notifications. Put the screens down, raise your glass, and taste the moment.',
+    tag: '#HereAndNow',
+  },
+];
+
 export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
+  const { t, language } = useLanguage();
+
   // Clink Toast sandbox state
   const [clinkCount, setClinkCount] = useState(12);
   const [clinkAnim, setClinkAnim] = useState(false);
@@ -63,47 +97,47 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
     setTimeout(() => setClinkAnim(false), 800);
   };
 
-  const filteredToasts = selectedToastCategory === 'all'
-    ? UKRAINIAN_TOASTS
-    : UKRAINIAN_TOASTS.filter((t) => t.category === selectedToastCategory);
+  const toastBank = language === 'uk' ? UKRAINIAN_TOASTS : ENGLISH_TOASTS;
 
-  const activeToast: ToastItem = filteredToasts[currentToastIndex % filteredToasts.length] || UKRAINIAN_TOASTS[0];
+  const filteredToasts = selectedToastCategory === 'all'
+    ? toastBank
+    : toastBank.filter((item) => item.category === selectedToastCategory);
+
+  const activeToast: ToastItem = filteredToasts[currentToastIndex % (filteredToasts.length || 1)] || toastBank[0];
 
   const handleNextToast = () => {
     playCelebrationPop();
-    setCurrentToastIndex((prev) => (prev + 1) % filteredToasts.length);
+    setCurrentToastIndex((prev) => (prev + 1) % (filteredToasts.length || 1));
     setCopiedToast(false);
   };
 
   const handleCopyToast = () => {
-    navigator.clipboard.writeText(`${activeToast.title}\n\n${activeToast.text}\n\n— З додатку «Будьмо!»`);
+    navigator.clipboard.writeText(`${activeToast.title}\n\n${activeToast.text}\n\n— Budmo App`);
     setCopiedToast(true);
     setTimeout(() => setCopiedToast(false), 2500);
   };
 
   return (
     <section id="features" className="py-20 md:py-28 bg-[#0a0a0c] relative">
-      
-      {/* Subtle atmospheric gradient */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-4">
-            Фішки, яких немає в інших додатках
+            {t.features.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display mb-4">
-            Створено для живих людей <br /> та справжнього настрою
+            {t.features.title}
           </h2>
           <p className="text-base sm:text-lg text-zinc-400">
-            Від віртуальних тостів до знижок у культових барах вашого міста.
+            {t.features.subtitle}
           </p>
         </div>
 
         {/* FEATURE 1 & 4 GRID: "Дзинь!" + "Тут і зараз" */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
           
-          {/* FEATURE 1: Функція "Дзинь!" (Interactive clink box) */}
+          {/* FEATURE 1: Функція "Дзинь!" */}
           <div className="lg:col-span-7 bg-[#121216] border border-zinc-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-xl">
             <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
               <span className="text-9xl">🥂</span>
@@ -111,13 +145,13 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
 
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold mb-4">
-                <span>🥂 Інтерактивна фішка</span>
+                <span>🥂 {language === 'uk' ? 'Інтерактивна фішка' : 'Interactive feature'}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-white font-display mb-3">
-                Функція «Дзинь!» — віртуальний тост при зустрічі
+                {t.features.feature1Title}
               </h3>
               <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
-                Коли ви зустрічаєтеся в закладі, просто піднесіть смартфони один до одного або натисніть «Дзинь!». Додаток фіксує успішну зустріч, нараховує обом бали лояльності та активує спешл-знижку на барі.
+                {t.features.feature1Desc}
               </p>
 
               {/* Interactive Clinking Sandbox */}
@@ -154,36 +188,36 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
                     className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-yellow-300 text-zinc-950 font-bold text-sm flex items-center gap-2 shadow-lg shadow-amber-500/25 active:scale-95 transition-all"
                   >
                     <span>🥂</span>
-                    <span>Зробити «Дзинь!»</span>
+                    <span>{language === 'uk' ? 'Зробити «Дзинь!»' : 'Make a "Clink!"'}</span>
                   </button>
 
                   <div className="text-left bg-zinc-900 border border-zinc-800 px-3.5 py-2 rounded-xl">
-                    <span className="text-[10px] text-zinc-400 block">Твої тости в демо:</span>
+                    <span className="text-[10px] text-zinc-400 block">{language === 'uk' ? 'Твої тости в демо:' : 'Your toasts in demo:'}</span>
                     <span className="text-sm font-bold text-amber-400 font-display">
-                      {clinkCount} разів
+                      {clinkCount} {language === 'uk' ? 'разів' : 'times'}
                     </span>
                   </div>
                 </div>
 
                 <p className="text-xs text-zinc-400">
-                  🔊 Клацніть кнопку — почуєте справжній кришталевий звук келихів!
+                  {language === 'uk' ? '🔊 Клацніть кнопку — почуєте справжній кришталевий звук келихів!' : '🔊 Click the button to hear real crystal glass clinking!'}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* FEATURE 4: Формат "Тут і зараз" */}
+          {/* FEATURE 3/4: Формат "Тут і зараз" */}
           <div className="lg:col-span-5 bg-[#121216] border border-zinc-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-xl">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold mb-4">
                 <Flame className="w-3.5 h-3.5" />
-                <span>Спонтанність рулить</span>
+                <span>{language === 'uk' ? 'Спонтанність рулить' : 'Spontaneity wins'}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-white font-display mb-3">
-                Формат «Тут і зараз»
+                {t.features.feature3Title}
               </h3>
               <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                Забудь про: «Давай зустрінемось через 2 тижні у вівторок, якщо буде настрій». «Будьмо!» працює для планів на найближчі 1-2 години.
+                {t.features.feature3Desc}
               </p>
 
               {/* Live Ticker Card */}
@@ -191,10 +225,10 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
                 <div className="flex items-center justify-between text-xs pb-2.5 border-b border-zinc-800">
                   <span className="text-zinc-400 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-amber-400" />
-                    Вікно зустрічі:
+                    {language === 'uk' ? 'Вікно зустрічі:' : 'Meetup window:'}
                   </span>
                   <span className="font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
-                    Найближчі {minutesRemaining} хв
+                    {minutesRemaining} {language === 'uk' ? 'хв' : 'min'}
                   </span>
                 </div>
 
@@ -202,24 +236,24 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
                   <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/80 border border-zinc-800/80">
                     <span className="text-zinc-300 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      Поділ: стіл на 4 особи
+                      {language === 'uk' ? 'Поділ: стіл на 4 особи' : 'Podil: table for 4'}
                     </span>
-                    <span className="text-zinc-400 font-mono text-[11px]">Орест + 1</span>
+                    <span className="text-zinc-400 font-mono text-[11px]">{language === 'uk' ? 'Орест + 1' : 'Orest + 1'}</span>
                   </div>
                   <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/80 border border-zinc-800/80">
                     <span className="text-zinc-300 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                      Хрещатик: кава на виніс
+                      {language === 'uk' ? 'Хрещатик: кава на виніс' : 'Khreshchatyk: takeaway coffee'}
                     </span>
-                    <span className="text-zinc-400 font-mono text-[11px]">Олена</span>
+                    <span className="text-zinc-400 font-mono text-[11px]">{language === 'uk' ? 'Олена' : 'Olena'}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="mt-6 pt-4 border-t border-zinc-800/70 text-xs text-zinc-400 flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>92% користувачів знаходять компанію менше ніж за 15 хвилин</span>
+              <Clock className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{language === 'uk' ? '92% користувачів знаходять компанію менше ніж за 15 хвилин' : '92% of users find company in under 15 minutes'}</span>
             </div>
           </div>
 
@@ -228,31 +262,29 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
         {/* FEATURE 2: 🎭 Генератор українських тостів (Interactive Widget) */}
         <div id="toasts" className="bg-gradient-to-br from-[#121216] via-[#15151c] to-[#0e0e12] border border-amber-500/20 rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
           
-          {/* Subtle warm decorative glow */}
           <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold mb-4">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Живий віджет на сайті</span>
+              <span>{language === 'uk' ? 'Живий віджет на сайті' : 'Live widget on site'}</span>
             </div>
 
             <h3 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight mb-3">
-              Генератор щирих українських тостів
+              {t.features.feature2Title}
             </h3>
             <p className="text-zinc-300 text-sm sm:text-base mb-8">
-              Ніяких заїжджених фраз із листівок. Тисніть кнопку та отримуйте влучні, душевні або дотепні тости для вашої компанії прямо зараз.
+              {t.features.feature2Desc}
             </p>
 
             {/* Category Pills */}
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               {[
-                { id: 'all', label: 'Всі тости' },
-                { id: 'friends', label: 'Для друзів 🍻' },
-                { id: 'victory', label: 'За ЗСУ та Перемогу 🇺🇦' },
-                { id: 'tech', label: 'Для айтівців 💻' },
-                { id: 'love', label: 'За кохання ❤️' },
-                { id: 'philosophical', label: 'Філософський 🌙' },
+                { id: 'all', label: language === 'uk' ? 'Всі тости' : 'All toasts' },
+                { id: 'friends', label: t.features.toastGenCategoryBeer },
+                { id: 'love', label: t.features.toastGenCategoryWine },
+                { id: 'tech', label: t.features.toastGenCategoryCoffee },
+                { id: 'victory', label: t.features.toastGenCategoryFun },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -288,7 +320,7 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
 
               <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-zinc-800/60">
                 <span className="text-xs text-zinc-400">
-                  Піднімай келих і кажи: <strong className="text-white">«Будьмо!»</strong>
+                  {language === 'uk' ? 'Піднімай келих і кажи:' : 'Raise your glass and say:'} <strong className="text-white">«{language === 'uk' ? 'Будьмо!' : 'Budmo!'}»</strong>
                 </span>
 
                 <div className="flex items-center gap-2">
@@ -299,12 +331,12 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
                     {copiedToast ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400">Скопійовано!</span>
+                        <span className="text-emerald-400">{t.features.toastGenCopied}</span>
                       </>
                     ) : (
                       <>
                         <Copy className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Скопіювати</span>
+                        <span>{language === 'uk' ? 'Скопіювати' : 'Copy'}</span>
                       </>
                     )}
                   </button>
@@ -320,7 +352,7 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-zinc-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 active:scale-95 transition-all"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>Згенерувати інший тост</span>
+                <span>{t.features.toastGenButton}</span>
               </button>
             </div>
 

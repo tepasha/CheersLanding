@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playGlassClink } from '../utils/audio';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
   onOpenWebApp: () => void;
@@ -27,6 +28,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpenTestLink }) => {
+  const { t } = useLanguage();
   const [toastCount, setToastCount] = useState(148);
   const [hasToasted, setHasToasted] = useState(false);
   const [activePersonTooltip, setActivePersonTooltip] = useState<string | null>('p1');
@@ -80,16 +82,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] mb-6 font-display">
-              Знайди компанію на вечір <br />
+              {t.hero.headlinePart1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
-                за 2 хвилини
+                {t.hero.headlineHighlight}
               </span>{' '}
-              у своєму районі
+              {t.hero.headlinePart2}
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl text-zinc-300 mb-8 max-w-2xl leading-relaxed font-normal">
-              Від ароматної кави на Подолі до крафтового пива біля дому. Реальні люди поруч, спільні смаки та щирі тости наживо без нескінченних переписок.
+              {t.hero.subtitle}
             </p>
 
             {/* Action CTA Buttons */}
@@ -100,7 +102,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
                 className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-2.5 group active:scale-[0.98]"
               >
                 <Smartphone className="w-5 h-5 text-zinc-950 group-hover:rotate-12 transition-transform" />
-                <span>Спробувати онлайн без встановлення</span>
+                <span>{t.hero.tryWebBtn}</span>
                 <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
               </button>
 
@@ -110,7 +112,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
                 className="px-5 py-4 rounded-xl text-base font-semibold text-zinc-100 bg-zinc-800/90 hover:bg-zinc-700/90 border border-zinc-700 hover:border-zinc-600 transition-all duration-200 flex items-center justify-center gap-2.5 shadow-md active:scale-[0.98]"
               >
                 <Download className="w-5 h-5 text-amber-400" />
-                <span>Завантажити додаток</span>
+                <span>{t.hero.downloadBtn}</span>
               </button>
             </div>
 
@@ -163,10 +165,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
                   {/* Floating Map Filter Pills */}
                   <div className="absolute top-2.5 left-2.5 right-2.5 z-20 flex items-center gap-1.5 overflow-x-auto no-scrollbar pointer-events-auto">
                     {[
-                      { id: 'all', label: 'Всі (18)' },
-                      { id: 'beer', label: '🍺 Крафт' },
-                      { id: 'coffee', label: '☕️ Кава' },
-                      { id: 'wine', label: '🍷 Вино' },
+                      { id: 'all', label: `${t.hero.filterAll} (18)` },
+                      { id: 'beer', label: `🍺 ${t.hero.filterBeer}` },
+                      { id: 'coffee', label: `☕️ ${t.hero.filterCoffee}` },
+                      { id: 'wine', label: `🍷 ${t.hero.filterWine}` },
                     ].map((tab) => (
                       <button
                         key={tab.id}
@@ -523,14 +525,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="text-zinc-300 flex items-center gap-1 truncate font-medium">
                       <Flame className="w-3 h-3 text-amber-400 shrink-0" />
-                      {activePersonTooltip === 'p1' && 'Орест • Крафтова IPA (300 м)'}
-                      {activePersonTooltip === 'p2' && 'Олена • Спешелті кава (150 м)'}
-                      {activePersonTooltip === 'p3' && 'Соломія • Келих вина (220 м)'}
-                      {activePersonTooltip === 'p4' && 'Дмитро • Коктейлі (380 м)'}
-                      {!activePersonTooltip && '18 людей поруч готові випити'}
+                      {activePersonTooltip === 'p1' && t.hero.people.orestStatus}
+                      {activePersonTooltip === 'p2' && t.hero.people.olenaStatus}
+                      {activePersonTooltip === 'p3' && t.hero.people.solomiaStatus}
+                      {activePersonTooltip === 'p4' && t.hero.people.dmytroStatus}
+                      {!activePersonTooltip && `18 ${t.hero.toastDefaultStatus}`}
                     </span>
                     <span className="font-bold text-amber-400 font-display text-xs shrink-0">
-                      {toastCount} тостів
+                      {toastCount} {t.hero.toastCountSuffix}
                     </span>
                   </div>
 
@@ -547,16 +549,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
                     <span className="text-sm">🥂</span>
                     <span>
                       {hasToasted 
-                        ? 'Дзинь! +1 тост на Подолі' 
+                        ? t.hero.toastBtnSuccess 
                         : activePersonTooltip 
-                          ? 'Чокнемось «Дзинь!» з обраним 🍻' 
-                          : 'Натисни «Дзинь!» для тесту'
+                          ? t.hero.toastBtnDefault 
+                          : t.hero.toastBtnPrompt
                       }
                     </span>
                   </button>
 
                   <p className="text-[9px] text-center text-zinc-400">
-                    Клікни на піни на карті або кнопку тосту для звуку та ефекту
+                    {t.hero.toastHelper}
                   </p>
                 </div>
 

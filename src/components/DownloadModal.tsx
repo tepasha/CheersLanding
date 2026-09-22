@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, Smartphone, Download, QrCode, CheckCircle2, ShieldCheck, Sparkles, ExternalLink } from 'lucide-react';
+import { X, ExternalLink, ShieldCheck } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -7,7 +8,8 @@ interface DownloadModalProps {
   defaultPlatform?: string;
 }
 
-export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, defaultPlatform }) => {
+export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose }) => {
+  const { t } = useLanguage();
   const [currentUrl, setCurrentUrl] = useState('');
 
   React.useEffect(() => {
@@ -29,7 +31,7 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
         <button
           onClick={onClose}
           className="absolute top-5 right-5 p-2 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-          aria-label="Закрити"
+          aria-label="Close"
         >
           <X className="w-5 h-5" />
         </button>
@@ -40,10 +42,10 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
             🍻
           </div>
           <h3 className="text-2xl font-bold font-display tracking-tight text-white mb-1">
-            Завантажити «Будьмо!»
+            {t.downloadModal.title}
           </h3>
           <p className="text-xs sm:text-sm text-zinc-400">
-            Завантажуйте виключно через офіційні магазини додатків Apple App Store та Google Play.
+            {t.downloadModal.subtitle}
           </p>
         </div>
 
@@ -52,19 +54,19 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
           <div className="w-24 h-24 bg-white p-1.5 rounded-xl shrink-0 flex items-center justify-center shadow-md overflow-hidden">
             <img
               src={qrCodeUrl}
-              alt="QR код для встановлення"
+              alt="QR code"
               className="w-full h-full object-contain"
             />
           </div>
           <div>
             <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-0.5">
-              Швидкий перехід
+              {t.downloadModal.quickAccessBadge}
             </span>
             <h4 className="text-sm font-bold text-white mb-1">
-              Наведи камеру смартфона
+              {t.downloadModal.scanQrTitle}
             </h4>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Відкриває офіційну сторінку завантаження у відповідному магазині вашого смартфона.
+              {t.downloadModal.scanQrDesc}
             </p>
           </div>
         </div>
@@ -80,12 +82,12 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
             <div className="flex items-center gap-3.5">
               <span className="text-3xl group-hover:scale-110 transition-transform"></span>
               <div className="text-left">
-                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">Офіційний магазин</p>
-                <p className="text-base font-bold text-white">Apple App Store (iOS)</p>
+                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">{t.downloadModal.officialStoreBadge}</p>
+                <p className="text-base font-bold text-white">{t.downloadModal.appleTitle}</p>
               </div>
             </div>
             <span className="text-xs text-amber-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
-              <span>Завантажити</span>
+              <span>{t.downloadModal.downloadAction}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </span>
           </a>
@@ -99,12 +101,12 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
             <div className="flex items-center gap-3.5">
               <span className="text-emerald-400 text-2xl font-bold group-hover:scale-110 transition-transform">▶</span>
               <div className="text-left">
-                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">Офіційний магазин</p>
-                <p className="text-base font-bold text-white">Google Play Store (Android)</p>
+                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">{t.downloadModal.officialStoreBadge}</p>
+                <p className="text-base font-bold text-white">{t.downloadModal.googleTitle}</p>
               </div>
             </div>
             <span className="text-xs text-emerald-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
-              <span>Завантажити</span>
+              <span>{t.downloadModal.downloadAction}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </span>
           </a>
@@ -113,7 +115,7 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, d
         {/* Security verification notice */}
         <div className="flex items-center justify-center gap-2 text-xs text-zinc-400 pt-2 border-t border-zinc-800">
           <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-          <span>Перевірено системами безпеки Apple App Store та Google Play Protect</span>
+          <span>{t.downloadModal.securityNote}</span>
         </div>
 
       </div>
