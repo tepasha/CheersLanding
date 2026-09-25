@@ -11,7 +11,7 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     venueName: '',
-    city: 'Київ',
+    city: '',
     district: '',
     venueType: 'Крафтовий паб',
     contact: '',
@@ -91,17 +91,14 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
                   <label className="block text-xs font-semibold text-zinc-300 mb-1">
                     Місто
                   </label>
-                  <select
+                  <input
+                    required
+                    type="text"
+                    placeholder="Вкажіть місто"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-amber-400"
-                  >
-                    <option value="Київ">Київ</option>
-                    <option value="Львів">Львів</option>
-                    <option value="Одеса">Одеса</option>
-                    <option value="Дніпро">Дніпро</option>
-                    <option value="Інше місто">Інше місто</option>
-                  </select>
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-amber-400"
+                  />
                 </div>
 
                 <div>
@@ -111,7 +108,7 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
                   <input
                     required
                     type="text"
-                    placeholder="напр. Поділ, Спаська"
+                    placeholder="напр. вул. Соборна"
                     value={formData.district}
                     onChange={(e) => setFormData({ ...formData, district: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-amber-400"

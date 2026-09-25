@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, MessageSquare } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const FaqSection: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const faqItems = [
@@ -74,31 +74,6 @@ export const FaqSection: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Support Callout */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-left">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
-              <MessageSquare className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-white">
-                {language === 'uk' ? 'Залишились запитання?' : 'Still have questions?'}
-              </p>
-              <p className="text-xs text-zinc-400">
-                {language === 'uk' ? 'Наша команда підтримки на звʼязку в Telegram 24/7' : 'Our community support team is online 24/7'}
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://t.me"
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 hover:text-white transition-colors whitespace-nowrap"
-          >
-            {language === 'uk' ? 'Написати в підтримку' : 'Contact Support'}
-          </a>
         </div>
 
       </div>

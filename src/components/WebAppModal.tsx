@@ -35,8 +35,8 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
     { 
       sender: 'me', 
       text: language === 'uk' 
-        ? 'Привіт! Так, саме шукаю компанію на Поділ, вільний на годинку 🍻' 
-        : 'Hey! Yes, looking for companions around Podil for an hour 🍻', 
+        ? 'Привіт! Так, саме шукаю компанію на вечір, вільний на годинку 🍻' 
+        : 'Hey! Yes, looking for companion for the evening, free for an hour 🍻', 
       time: '20:14' 
     },
     { 
@@ -117,11 +117,11 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
               }}
               className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[11px] font-semibold text-amber-400 border border-zinc-700 flex items-center gap-1.5"
             >
+              <span>{language === 'uk' ? 'Встановити' : 'Install'}</span>
               <span className="flex items-center gap-1 text-zinc-350">
                 <AppleStoreIcon className="w-3 h-3 text-zinc-200" />
                 <GooglePlayIcon className="w-3 h-3 text-zinc-200" />
               </span>
-              <span>{language === 'uk' ? 'Встановити' : 'Install'}</span>
             </button>
             <button
               onClick={onClose}
@@ -148,7 +148,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                   </span>
                   <span className="font-semibold text-zinc-200">
-                    {language === 'uk' ? 'Поділ, Київ (Радіус 1.5 км)' : 'Podil, Kyiv (Radius 1.5 km)'}
+                    {language === 'uk' ? 'Твоя локація (Радіус 1.5 км)' : 'Your location (Radius 1.5 km)'}
                   </span>
                 </div>
                 <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
@@ -287,7 +287,7 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                 />
                 <div>
                   <h4 className="text-xs font-bold text-white font-display">
-                    {language === 'uk' ? 'Орест (Поділ)' : 'Orest (Podil)'}
+                    {language === 'uk' ? 'Орест (Поруч)' : 'Orest (Nearby)'}
                   </h4>
                   <span className="text-[10px] text-emerald-400 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />

@@ -167,14 +167,14 @@ export const FeaturesShowcase: React.FC<FeaturesShowcaseProps> = () => {
                   <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/80 border border-zinc-800/80">
                     <span className="text-zinc-300 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      {language === 'uk' ? 'Поділ: стіл на 4 особи' : 'Podil: table for 4'}
+                      {language === 'uk' ? 'Паб поруч: стіл на 4 особи' : 'Nearby pub: table for 4'}
                     </span>
                     <span className="text-zinc-400 font-mono text-[11px]">{language === 'uk' ? 'Орест + 1' : 'Orest + 1'}</span>
                   </div>
                   <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/80 border border-zinc-800/80">
                     <span className="text-zinc-300 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                      {language === 'uk' ? 'Хрещатик: кава на виніс' : 'Khreshchatyk: takeaway coffee'}
+                      {language === 'uk' ? 'Кавʼярня поруч: кава на виніс' : 'Nearby cafe: takeaway coffee'}
                     </span>
                     <span className="text-zinc-400 font-mono text-[11px]">{language === 'uk' ? 'Олена' : 'Olena'}</span>
                   </div>

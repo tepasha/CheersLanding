@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   ShieldCheck, 
   MapPinOff, 
-  UserCheck, 
   AlertOctagon, 
   CheckCircle2, 
   EyeOff,
@@ -32,46 +31,15 @@ export const SafetySection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display mb-4">
             {t.safety.title}
           </h2>
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed whitespace-pre-line">
             {t.safety.subtitle}
           </p>
         </div>
 
-        {/* 4 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 md:mb-8">
+        {/* 3 Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-6 md:mb-8">
           
-          {/* Pillar 1: Verification */}
-          <div className="bg-[#121216] border border-zinc-800 hover:border-emerald-500/40 rounded-2xl p-7 transition-all duration-200 group">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <UserCheck className="w-6 h-6" />
-              </div>
-              <div className="flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300 font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                <span>{t.safety.pillar1Tag}</span>
-              </div>
-            </div>
-
-            <h3 className="text-xl font-bold text-white font-display mb-2">
-              {t.safety.pillar1Title}
-            </h3>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-              {t.safety.pillar1Desc}
-            </p>
-
-            <ul className="space-y-2 text-xs text-zinc-300">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>{t.safety.pillar1Point1}</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>{t.safety.pillar1Point2}</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Pillar 2: Public Places Only */}
+          {/* Pillar 1: Public Places Only */}
           <div className="bg-[#121216] border border-zinc-800 hover:border-emerald-500/40 rounded-2xl p-7 transition-all duration-200 group">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">

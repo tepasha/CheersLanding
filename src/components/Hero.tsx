@@ -8,12 +8,12 @@ import {
   Wine,
   Coffee,
   Beer,
-  ArrowRight,
   Navigation,
   Plus,
   Minus,
   Map as MapIcon,
-  Crosshair
+  Crosshair,
+  Smartphone
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
@@ -99,13 +99,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                 onClick={() => (onOpenDownload ? onOpenDownload() : onOpenWebApp())}
                 className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-3 group active:scale-[0.98]"
               >
+                <span>{t.hero.tryWebBtn}</span>
                 <div className="flex items-center gap-1.5 bg-zinc-950/15 py-1 px-2.5 rounded-lg border border-zinc-950/20 shadow-sm shrink-0">
                   <AppleStoreIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
                   <span className="w-px h-3.5 bg-zinc-950/25" />
                   <GooglePlayIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
                 </div>
-                <span>{t.hero.tryWebBtn}</span>
-                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <button
+                id="hero-open-webapp-btn"
+                onClick={onOpenWebApp}
+                className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-2.5 group active:scale-[0.98]"
+              >
+                <Smartphone className="w-5 h-5 text-zinc-950 group-hover:scale-110 transition-transform" />
+                <span>Web App</span>
               </button>
             </div>
 
@@ -148,7 +156,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                   </div>
                   <div className="flex items-center gap-1 text-[10px] bg-zinc-900/90 px-2 py-0.5 rounded-full text-zinc-300 border border-zinc-700/60">
                     <MapPin className="w-2.5 h-2.5 text-amber-400" />
-                    <span>Поділ • 1.5 км</span>
+                    <span>Поруч • 1.5 км</span>
                   </div>
                 </div>
 
@@ -211,7 +219,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                     <span>100 м</span>
                   </div>
 
-                  {/* Vector Map Canvas (Podil, Kyiv) */}
+                  {/* Vector Map Canvas */}
                   <div 
                     className="absolute inset-0 w-full h-full transition-transform duration-300 origin-center"
                     style={{ transform: `scale(${mapZoom})` }}
@@ -303,22 +311,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
 
                       {/* Street Names Labels */}
                       <text x="75" y="325" fill="#64748b" fontSize="7.5" fontWeight="600" letterSpacing="0.08em" transform="rotate(-62 75 325)">
-                        АНДРІЇВСЬКИЙ УЗВІЗ
+                        ПАРКОВА АЛЕЯ
                       </text>
                       <text x="165" y="275" fill="#f59e0b" fontSize="7.5" fontWeight="700" letterSpacing="0.08em" transform="rotate(48 165 275)" opacity="0.9">
-                        ВУЛ. САГАЙДАЧНОГО
+                        ГОЛОВНА ВУЛИЦЯ
                       </text>
                       <text x="35" y="91" fill="#64748b" fontSize="7" fontWeight="600" letterSpacing="0.05em">
-                        ВЕРХНІЙ ВАЛ
+                        СХІДНИЙ БУЛЬВАР
                       </text>
                       <text x="35" y="119" fill="#64748b" fontSize="7" fontWeight="600" letterSpacing="0.05em">
-                        НИЖНІЙ ВАЛ
+                        ЗАХІДНИЙ ПРОСПЕКТ
                       </text>
                       <text x="108" y="195" fill="#94a3b8" fontSize="7.5" fontWeight="700" letterSpacing="0.05em">
-                        КОНТРАКТОВА ПЛ.
+                        ЦЕНТРАЛЬНА ПЛОЩА
                       </text>
                       <text x="295" y="130" fill="#38bdf8" fontSize="7.5" fontWeight="600" letterSpacing="0.1em" opacity="0.6" transform="rotate(75 295 130)">
-                        Р. ДНІПРО
+                        НАБЕРЕЖНА
                       </text>
 
                       {/* Metro Icon */}
@@ -343,16 +351,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                       </div>
 
                       <span className="mt-1 text-[9px] font-bold text-amber-300 bg-zinc-950/95 px-2 py-0.5 rounded-full border border-amber-500/40 shadow-md whitespace-nowrap">
-                        Ти (Контрактова)
+                        Ти (Тут поруч)
                       </span>
                     </div>
 
-                    {/* Person 1: Орест (вул. Сагайдачного) */}
+                    {/* Person 1: Орест */}
                     {(selectedMapFilter === 'all' || selectedMapFilter === 'beer') && (
                       <div 
                         onClick={() => setActivePersonTooltip(activePersonTooltip === 'p1' ? null : 'p1')}
                         className="absolute top-[62%] left-[64%] z-20 cursor-pointer group transition-transform hover:scale-110"
-                        title="Орест, 27 • вул. Сагайдачного"
+                        title="Орест, 27 • 300 м поруч"
                       >
                         <div className="relative">
                           <div className={`w-10 h-10 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
@@ -379,7 +387,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                           <div className="absolute -left-20 -top-16 w-44 bg-zinc-900/95 border border-amber-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-30">
                             <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
                               <span>Орест, 27</span>
-                              <span className="text-[9px] text-amber-400 font-semibold">вул. Сагайдачного</span>
+                              <span className="text-[9px] text-amber-400 font-semibold">Крафт-бар поруч</span>
                             </div>
                             <p className="text-[10px] text-zinc-300 leading-tight">
                               «Шукаю компанію на крафтову IPA»
@@ -389,12 +397,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                       </div>
                     )}
 
-                    {/* Person 2: Олена (Контрактова площа) */}
+                    {/* Person 2: Олена */}
                     {(selectedMapFilter === 'all' || selectedMapFilter === 'coffee') && (
                       <div 
                         onClick={() => setActivePersonTooltip(activePersonTooltip === 'p2' ? null : 'p2')}
                         className="absolute top-[32%] left-[46%] z-20 cursor-pointer group transition-transform hover:scale-110"
-                        title="Олена, 25 • Контрактова пл."
+                        title="Олена, 25 • 150 м поруч"
                       >
                         <div className="relative">
                           <div className={`w-9 h-9 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
@@ -419,7 +427,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                           <div className="absolute -left-12 -top-16 w-42 bg-zinc-900/95 border border-emerald-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 z-30">
                             <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
                               <span>Олена, 25</span>
-                              <span className="text-[9px] text-emerald-400 font-semibold">One Love Coffee</span>
+                              <span className="text-[9px] text-emerald-400 font-semibold">Кавʼярня поруч</span>
                             </div>
                             <p className="text-[10px] text-zinc-300 leading-tight">
                               «Пʼю спешелті лате, сумую»
@@ -429,12 +437,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                       </div>
                     )}
 
-                    {/* Person 3: Соломія (Андріївський узвіз) */}
+                    {/* Person 3: Соломія */}
                     {(selectedMapFilter === 'all' || selectedMapFilter === 'wine') && (
                       <div 
                         onClick={() => setActivePersonTooltip(activePersonTooltip === 'p3' ? null : 'p3')}
                         className="absolute top-[68%] left-[16%] z-20 cursor-pointer group transition-transform hover:scale-110"
-                        title="Соломія, 26 • Андріївський узвіз"
+                        title="Соломія, 26 • 220 м поруч"
                       >
                         <div className="relative">
                           <div className={`w-9 h-9 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
@@ -459,7 +467,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                           <div className="absolute left-1 -top-16 w-42 bg-zinc-900/95 border border-rose-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md z-30">
                             <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
                               <span>Соломія, 26</span>
-                              <span className="text-[9px] text-rose-400 font-semibold">Андріївський</span>
+                              <span className="text-[9px] text-rose-400 font-semibold">Тераса поруч</span>
                             </div>
                             <p className="text-[10px] text-zinc-300 leading-tight">
                               «Келих вина на терасі»
@@ -469,12 +477,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                       </div>
                     )}
 
-                    {/* Person 4: Дмитро (вул. Нижній Вал) */}
+                    {/* Person 4: Дмитро */}
                     {(selectedMapFilter === 'all' || selectedMapFilter === 'beer') && (
                       <div 
                         onClick={() => setActivePersonTooltip(activePersonTooltip === 'p4' ? null : 'p4')}
                         className="absolute top-[18%] left-[60%] z-20 cursor-pointer group transition-transform hover:scale-110"
-                        title="Дмитро, 29 • вул. Нижній Вал"
+                        title="Дмитро, 29 • 380 м поруч"
                       >
                         <div className="relative">
                           <div className={`w-8 h-8 rounded-full border-2 overflow-hidden shadow-xl transition-all ${
@@ -499,7 +507,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                           <div className="absolute -left-20 -top-16 w-40 bg-zinc-900/95 border border-cyan-500/60 rounded-xl p-2.5 shadow-2xl backdrop-blur-md z-30">
                             <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
                               <span>Дмитро, 29</span>
-                              <span className="text-[9px] text-cyan-400 font-semibold">Нижній Вал</span>
+                              <span className="text-[9px] text-cyan-400 font-semibold">Бар поруч</span>
                             </div>
                             <p className="text-[10px] text-zinc-300 leading-tight">
                               «Затишний бар, хто поруч?»

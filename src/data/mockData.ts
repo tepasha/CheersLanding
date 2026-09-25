@@ -10,7 +10,7 @@ export const NEARBY_PEOPLE: NearbyPerson[] = [
     drink: 'Craft IPA або Стаут',
     category: 'craft_beer',
     vibe: 'Обговорити дизайн & крафтові броварні',
-    locationName: 'Поділ, біля Житнього',
+    locationName: 'Центральний район, ~300м',
     status: 'ready_now',
     verified: true,
     interests: ['Крафт', 'UX/UI', 'Вініл', 'Футбол']
@@ -24,7 +24,7 @@ export const NEARBY_PEOPLE: NearbyPerson[] = [
     drink: 'Фільтр-кава / Лате',
     category: 'coffee',
     vibe: 'Затишна розмова про подорожі & книги',
-    locationName: 'вул. Сагайдачного',
+    locationName: 'Пішохідна вулиця, ~150м',
     status: 'ready_now',
     verified: true,
     interests: ['Спешелті кава', 'Книги', 'Плівкове фото']
@@ -38,7 +38,7 @@ export const NEARBY_PEOPLE: NearbyPerson[] = [
     drink: 'Сухий яблучний сидр',
     category: 'craft_beer',
     vibe: 'Дивимось матч Ліги Чемпіонів у пабі',
-    locationName: 'Контрактова площа',
+    locationName: 'Центральна площа, ~450м',
     status: 'ready_now',
     verified: true,
     interests: ['Футбол', 'Стендап', 'Стартапи']
@@ -52,7 +52,7 @@ export const NEARBY_PEOPLE: NearbyPerson[] = [
     drink: 'Сухе червоне / Негроні',
     category: 'cocktail',
     vibe: 'Вечірній чіл після роботи, гарна музика',
-    locationName: 'Андріївський узвіз',
+    locationName: 'Затишний сквер, ~220м',
     status: 'ready_now',
     verified: true,
     interests: ['Мистецтво', 'Архітектура', 'Джаз']
@@ -66,7 +66,7 @@ export const NEARBY_PEOPLE: NearbyPerson[] = [
     drink: 'Травʼяний чай / Безалкогольний',
     category: 'tea_non_alc',
     vibe: 'Партія у настілки (Catan або Кодові Імена)',
-    locationName: 'Ярославів Вал',
+    locationName: 'Паркова зона, ~620м',
     status: 'active',
     verified: true,
     interests: ['Настілки', 'ШІ & Код', 'Психологія']
@@ -77,9 +77,9 @@ export const PARTNER_BARS: PartnerBar[] = [
   {
     id: 'b1',
     name: 'RePublic Craft Pub',
-    city: 'Київ',
-    district: 'Поділ',
-    address: 'вул. Спаська, 8А',
+    city: 'Поруч',
+    district: 'Центральний район',
+    address: 'вул. Соборна, 8А',
     type: 'Крафтовий паб',
     rating: 4.9,
     discountText: '-15% на крани з Budmo',
@@ -90,10 +90,10 @@ export const PARTNER_BARS: PartnerBar[] = [
   },
   {
     id: 'b2',
-    name: 'Squat 17b Yard Cafe',
-    city: 'Київ',
-    district: 'Шевченківський',
-    address: 'вул. Терещенківська, 17Б',
+    name: 'Squat Yard Cafe',
+    city: 'Поруч',
+    district: 'Затишний квартал',
+    address: 'вул. Театральна, 17Б',
     type: 'Культурний простір & бар',
     rating: 4.9,
     discountText: '-10% на все меню',
@@ -105,9 +105,9 @@ export const PARTNER_BARS: PartnerBar[] = [
   {
     id: 'b3',
     name: 'Човен (Choven)',
-    city: 'Львів',
-    district: 'Центр',
-    address: 'вул. Вірменська, 33',
+    city: 'Поруч',
+    district: 'Старий центр',
+    address: 'вул. Шевченка, 33',
     type: 'Легендарний крафт-бар',
     rating: 4.95,
     discountText: '-15% на український крафт',
@@ -119,9 +119,9 @@ export const PARTNER_BARS: PartnerBar[] = [
   {
     id: 'b4',
     name: 'One Love Coffee',
-    city: 'Київ',
-    district: 'Хрещатик / ЦУМ',
-    address: 'вул. Хрещатик, 38',
+    city: 'Поруч',
+    district: 'Головна площа',
+    address: 'вул. Центральна, 38',
     type: 'Спешелті кавʼярня',
     rating: 4.8,
     discountText: '-10% на спешелті зерно',
@@ -133,9 +133,9 @@ export const PARTNER_BARS: PartnerBar[] = [
   {
     id: 'b5',
     name: 'Port Wine Bar',
-    city: 'Одеса',
-    district: 'Приморський',
-    address: 'пров. Віце-Адмірала Жукова, 8',
+    city: 'Поруч',
+    district: 'Парковий район',
+    address: 'пров. Затишний, 8',
     type: 'Винний бар & затишок',
     rating: 4.85,
     discountText: '-20% на другий келих',
@@ -147,9 +147,9 @@ export const PARTNER_BARS: PartnerBar[] = [
   {
     id: 'b6',
     name: 'Світ Кави (Svit Kavy)',
-    city: 'Львів',
-    district: 'Площа Ринок',
-    address: 'пл. Катедральна, 6',
+    city: 'Поруч',
+    district: 'Історичний район',
+    address: 'пл. Ринок, 6',
     type: 'Кавʼярня & десерти',
     rating: 4.9,
     discountText: '-12% для користувачів Budmo',
@@ -165,14 +165,14 @@ export const UKRAINIAN_TOASTS: ToastItem[] = [
     id: 't1',
     category: 'friends',
     title: 'За справжніх поруч',
-    text: '«Випʼємо за те, щоб серед мільйонів людей у місті завжди знаходився той, із ким можна розділити келих холодного крафту, щиру розмову і теплий вечір без пафосу. Будьмо!»',
+    text: '«Випʼємо за те, щоб серед тисяч людей довкола завжди знаходився той, із ким можна розділити келих холодного крафту, щиру розмову і теплий вечір без пафосу. Будьмо!»',
     tag: '#Дружба #Щирість'
   },
   {
     id: 't2',
     category: 'victory',
     title: 'За нашу незламність і ЗСУ',
-    text: '«Піднімаємо келихи за тих хоробрих хлопців і дівчат, завдяки кому ми можемо сьогодні безпечно бачитися, обійматися та жити в рідному українському місті. За нашу Перемогу і вічну славу захисникам!»',
+    text: '«Піднімаємо келихи за тих хоробрих хлопців і дівчат, завдяки кому ми можемо сьогодні безпечно бачитися, обійматися та жити на рідній українській землі. За нашу Перемогу і вічну славу захисникам!»',
     tag: '#ЗСУ #Перемога #Слава'
   },
   {
@@ -199,9 +199,9 @@ export const UKRAINIAN_TOASTS: ToastItem[] = [
   {
     id: 't6',
     category: 'friends',
-    title: 'За рідне місто і сусідів',
-    text: '«За наш затишний Поділ, за каштани на Хрещатику, за дворики Львова та морський бриз Одеси! За те, що де б ми не були — ми завжди знаходимо своїх людей. Будьмо, гей!»',
-    tag: '#Місто #Сусіди #Вайб'
+    title: 'За сусідів і теплий вайб',
+    text: '«За затишні вулиці, за щирі посмішки та улюблені заклади! За те, що де б ми не були — ми завжди знаходимо своїх людей поруч. Будьмо, гей!»',
+    tag: '#Сусіди #Друзі #Вайб'
   }
 ];
 
@@ -209,18 +209,18 @@ export const REVIEWS: ReviewItem[] = [
   {
     id: 'r1',
     name: 'Максим Ковальчук',
-    cityDistrict: 'Київ, Поділ',
+    cityDistrict: 'Користувач Будьмо',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop&q=80',
     rating: 5,
     date: '3 дні тому',
     drinkVibe: 'Крафтовий Milk Stout',
     badge: 'Верифіковано через Дія',
-    text: '«Переїхав на Поділ місяць тому, друзів у цьому районі не мав. Увімкнув радар у Будьмо в суботу о 19:00 — вже о 19:20 ми сиділи у барі з двома дизайнерами, пили локальний портер і сперечалися про шрифти. Тепер збираємось щотижня!»'
+    text: '«Переїхав у новий район місяць тому, друзів поблизу не мав. Увімкнув радар у Будьмо в суботу о 19:00 — вже о 19:20 ми сиділи у затишному барі з двома дизайнерами, пили локальний портер і спілкувалися про улюблені проєкти. Тепер збираємось щотижня!»'
   },
   {
     id: 'r2',
     name: 'Катерина Василенко',
-    cityDistrict: 'Львів, Франківський р-н',
+    cityDistrict: 'Користувачка додатку',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80',
     rating: 5,
     date: 'Вчора о 21:15',
@@ -231,11 +231,11 @@ export const REVIEWS: ReviewItem[] = [
   {
     id: 'r3',
     name: 'Денис & Артем',
-    cityDistrict: 'Одеса, Центр',
+    cityDistrict: 'Користувачі Будьмо',
     avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=120&auto=format&fit=crop&q=80',
     rating: 5,
     date: 'Тиждень тому',
-    drinkVibe: 'Одеське сухе біле вино',
+    drinkVibe: 'Сухе біле вино',
     badge: '12 спільних зустрічей',
     text: '«Шукали компанію глянути фінал кубка у пабі, бо друзі розʼїхалися. Через додаток відгукнулися ще четверо хлопців за 400 метрів. Заклад ще й зробив нам спешл -15% за функцію "Дзинь!". Найкращий додаток року!»'
   }
