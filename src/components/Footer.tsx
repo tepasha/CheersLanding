@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, FileText, ArrowUp, Smartphone } from 'lucide-react';
+import { Shield, FileText, ArrowUp, Smartphone, Heart, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
@@ -20,10 +20,10 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-[#08080a] border-t border-zinc-800/80 text-zinc-400 text-xs py-14">
+    <footer className="bg-[#08080a] border-t border-zinc-800/80 text-zinc-400 text-xs pt-6 pb-10 sm:pt-8 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-zinc-800/60">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 sm:pb-10 border-b border-zinc-800/60">
           
           {/* Col 1: Brand Info */}
           <div className="md:col-span-4 space-y-3">
@@ -70,6 +70,18 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a href="#faq" className="hover:text-amber-400 transition-colors">
                   {t.nav.faq}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://donatello.to/PavelTerekhov"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors flex items-center gap-1.5 text-amber-400/90 font-medium"
+                >
+                  <Heart className="w-3.5 h-3.5 fill-amber-400/30 text-amber-400" />
+                  <span>{t.footer.supportDev}</span>
+                  <ExternalLink className="w-3 h-3 opacity-70" />
                 </a>
               </li>
             </ul>

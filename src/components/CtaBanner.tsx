@@ -11,7 +11,7 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
   const { t, language } = useLanguage();
 
   return (
-    <section className="py-16 md:py-24 bg-[#0a0a0c] relative overflow-hidden">
+    <section className="py-8 md:py-10 bg-[#0a0a0c] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="relative rounded-3xl bg-gradient-to-br from-amber-600/20 via-[#15151b] to-zinc-950 border border-amber-500/30 p-8 sm:p-14 overflow-hidden shadow-2xl">

@@ -60,7 +60,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
   };
 
   return (
-    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
+    <section className="relative pt-24 pb-10 md:pt-28 md:pb-14 overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-emerald-500/8 rounded-full blur-[120px] pointer-events-none" />

@@ -144,6 +144,10 @@ export interface TranslationSchema {
     copyright: string;
     allRightsReserved: string;
     madeIn: string;
+    techSupport: string;
+    techSupportDesc: string;
+    supportDev: string;
+    supportDevSubtitle: string;
   };
   downloadModal: {
     title: string;
@@ -337,6 +341,10 @@ export const translations: Record<Language, TranslationSchema> = {
       copyright: '«Будьмо!» (Budmo App)',
       allRightsReserved: 'Всі права захищено.',
       madeIn: 'Зроблено з душею в Україні',
+      techSupport: 'Тех підтримка',
+      techSupportDesc: 'Зворотний звʼязок та допомога',
+      supportDev: 'Підтримати розробника',
+      supportDevSubtitle: 'Добровільний донат автору проекту',
     },
     downloadModal: {
       title: 'Завантажити «Будьмо!»',
@@ -529,6 +537,10 @@ export const translations: Record<Language, TranslationSchema> = {
       copyright: 'Budmo App',
       allRightsReserved: 'All rights reserved.',
       madeIn: 'Made with passion in Ukraine',
+      techSupport: 'Tech support',
+      techSupportDesc: 'Help & feedback',
+      supportDev: 'Support the developer',
+      supportDevSubtitle: 'Voluntary contribution to author',
     },
     downloadModal: {
       title: 'Download Budmo!',

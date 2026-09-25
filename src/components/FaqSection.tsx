@@ -19,11 +19,11 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-[#0e0e12] border-t border-zinc-800/80">
+    <section id="faq" className="py-10 md:py-14 bg-[#0e0e12] border-t border-zinc-800/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-4">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>{t.faq.badge}</span>

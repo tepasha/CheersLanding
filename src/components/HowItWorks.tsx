@@ -20,7 +20,7 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 md:py-28 bg-[#0e0e12] border-y border-zinc-800/60 relative overflow-hidden">
+    <section id="how-it-works" className="py-10 md:py-14 bg-[#0e0e12] border-y border-zinc-800/60 relative overflow-hidden">
       
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -29,7 +29,7 @@ export const HowItWorks: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-4">
             {t.howItWorks.badge}
           </div>

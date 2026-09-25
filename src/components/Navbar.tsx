@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Smartphone, Download, Link2, Globe } from 'lucide-react';
+import { Menu, X, Smartphone, Download, Link2, Globe, Heart } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
@@ -241,6 +241,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
               <Download className="w-4 h-4" />
               <span>{t.nav.downloadApp}</span>
             </button>
+            <a
+              href="https://donatello.to/PavelTerekhov"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-2.5 rounded-xl font-semibold text-sm bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:text-white flex items-center justify-center gap-2 transition-colors"
+            >
+              <Heart className="w-4 h-4 text-amber-400 fill-amber-400" />
+              <span>{t.footer.supportDev}</span>
+            </a>
           </div>
         </div>
       )}

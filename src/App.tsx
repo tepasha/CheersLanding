@@ -6,6 +6,7 @@ import { FeaturesShowcase } from './components/FeaturesShowcase';
 import { SafetySection } from './components/SafetySection';
 import { FaqSection } from './components/FaqSection';
 import { CtaBanner } from './components/CtaBanner';
+import { SupportSection } from './components/SupportSection';
 import { Footer } from './components/Footer';
 import { WebAppModal } from './components/WebAppModal';
 import { DownloadModal } from './components/DownloadModal';
@@ -76,7 +77,10 @@ export default function App() {
         />
       </main>
 
-      {/* 9. Footer */}
+      {/* Support & Developer Section (Above Footer) */}
+      <SupportSection />
+
+      {/* Footer */}
       <Footer
         onOpenPrivacy={handleOpenPrivacy}
         onOpenTerms={handleOpenTerms}
