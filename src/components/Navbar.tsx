@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Smartphone, Download, Link2, Globe, Heart } from 'lucide-react';
+import { Menu, X, Smartphone, Link2, Globe, Heart } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
   onOpenWebApp: () => void;
-  onOpenDownload: () => void;
+  onOpenDownload?: () => void;
   onOpenTestLink: () => void;
 }
 
@@ -25,7 +25,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
     { name: t.nav.howItWorks, href: '#how-it-works' },
     { name: t.nav.features, href: '#features' },
     { name: t.nav.safety, href: '#safety' },
-    { name: t.nav.toasts, href: '#toasts' },
     { name: t.nav.faq, href: '#faq' },
   ];
 
@@ -117,19 +116,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
             <button
               id="nav-webapp-btn"
               onClick={onOpenWebApp}
-              className="px-3.5 py-2 rounded-xl text-xs font-semibold text-zinc-200 hover:text-white bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/60 transition-all duration-200 flex items-center gap-1.5 shadow-sm"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all duration-200 flex items-center gap-1.5 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 active:scale-[0.98]"
             >
-              <Smartphone className="w-3.5 h-3.5 text-amber-400" />
+              <Smartphone className="w-3.5 h-3.5" />
               <span>{t.nav.webApp}</span>
-            </button>
-
-            <button
-              id="nav-download-btn"
-              onClick={onOpenDownload}
-              className="px-3.5 py-2 rounded-xl text-xs font-semibold text-zinc-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all duration-200 flex items-center gap-1.5 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 active:scale-[0.98]"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>{t.nav.downloadApp}</span>
             </button>
           </div>
 
@@ -226,20 +216,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
                 setMobileMenuOpen(false);
                 onOpenWebApp();
               }}
-              className="w-full py-2.5 rounded-xl font-semibold text-sm bg-zinc-800 text-zinc-100 hover:bg-zinc-700 flex items-center justify-center gap-2"
+              className="w-full py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 to-amber-500 text-zinc-950 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
             >
-              <Smartphone className="w-4 h-4 text-amber-400" />
+              <Smartphone className="w-4 h-4" />
               <span>{t.nav.webApp}</span>
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenDownload();
-              }}
-              className="w-full py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-amber-400 to-amber-500 text-zinc-950 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
-            >
-              <Download className="w-4 h-4" />
-              <span>{t.nav.downloadApp}</span>
             </button>
             <a
               href="https://donatello.to/PavelTerekhov"

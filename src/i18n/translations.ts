@@ -216,7 +216,7 @@ export const translations: Record<Language, TranslationSchema> = {
       headlineHighlight: 'за 2 хвилини',
       headlinePart2: 'у своєму районі',
       subtitle: 'Від ароматної кави на Подолі до крафтового пива біля дому. Реальні люди поруч, спільні смаки та щирі тости наживо без нескінченних переписок.',
-      tryWebBtn: 'Спробувати Web-версію',
+      tryWebBtn: 'Встановити',
       downloadBtn: 'Завантажити додаток',
       radarTitle: 'Радар Подолу',
       filterAll: 'Всі',

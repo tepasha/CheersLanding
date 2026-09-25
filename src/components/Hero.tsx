@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { 
   Sparkles, 
   Smartphone, 
-  Download, 
   Compass, 
   MapPin, 
   CheckCircle2, 
@@ -23,7 +22,7 @@ import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
   onOpenWebApp: () => void;
-  onOpenDownload: (platform?: string) => void;
+  onOpenDownload?: (platform?: string) => void;
   onOpenTestLink: () => void;
 }
 
@@ -104,15 +103,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload, onOpen
                 <Smartphone className="w-5 h-5 text-zinc-950 group-hover:rotate-12 transition-transform" />
                 <span>{t.hero.tryWebBtn}</span>
                 <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              <button
-                id="hero-download-modal-btn"
-                onClick={() => onOpenDownload()}
-                className="px-5 py-4 rounded-xl text-base font-semibold text-zinc-100 bg-zinc-800/90 hover:bg-zinc-700/90 border border-zinc-700 hover:border-zinc-600 transition-all duration-200 flex items-center justify-center gap-2.5 shadow-md active:scale-[0.98]"
-              >
-                <Download className="w-5 h-5 text-amber-400" />
-                <span>{t.hero.downloadBtn}</span>
               </button>
             </div>
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Smartphone, Download, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Smartphone, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface CtaBannerProps {
   onOpenWebApp: () => void;
-  onOpenDownload: (platform?: string) => void;
+  onOpenDownload?: (platform?: string) => void;
 }
 
 export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownload }) => {
@@ -44,15 +44,6 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
                 <Smartphone className="w-5 h-5" />
                 <span>{t.cta.webAppBtn}</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                id="cta-download-btn"
-                onClick={() => onOpenDownload()}
-                className="px-6 py-4 rounded-xl text-base font-semibold text-white bg-zinc-800/90 hover:bg-zinc-700/90 border border-zinc-700 transition-all flex items-center justify-center gap-2.5 active:scale-[0.98]"
-              >
-                <Download className="w-5 h-5 text-amber-400" />
-                <span>{t.cta.downloadBtn}</span>
               </button>
             </div>
 
