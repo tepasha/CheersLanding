@@ -21,22 +21,22 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
           <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{t.cta.badge}</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-display mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-display mb-6 leading-tight max-w-2xl">
               {t.cta.title}
             </h2>
 
-            <p className="text-base sm:text-lg text-zinc-300 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-zinc-300 mb-8 leading-relaxed max-w-xl">
               {t.cta.subtitle}
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-8 w-full sm:w-auto">
               <button
                 id="cta-open-pwa-btn"
                 onClick={() => (onOpenDownload ? onOpenDownload() : onOpenWebApp())}
@@ -61,7 +61,7 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
             </div>
 
             {/* Badges */}
-            <div className="flex flex-wrap items-center gap-6 text-xs text-zinc-400 pt-6 border-t border-zinc-800/60">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400 pt-6 border-t border-zinc-800/60 w-full max-w-xl">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span className="text-zinc-200">{t.cta.guarantee}</span>
