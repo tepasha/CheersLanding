@@ -6,9 +6,9 @@ import {
   MessageSquare, 
   User, 
   Send, 
-  ShieldCheck, 
-  Download
+  ShieldCheck
 } from 'lucide-react';
+import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
 import confetti from 'canvas-confetti';
 import { NEARBY_PEOPLE, PARTNER_BARS } from '../data/mockData';
 import { playGlassClink, playCelebrationPop } from '../utils/audio';
@@ -115,9 +115,12 @@ export const WebAppModal: React.FC<WebAppModalProps> = ({ isOpen, onClose, onOpe
                 onClose();
                 onOpenDownload();
               }}
-              className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[11px] font-semibold text-amber-400 border border-zinc-700 flex items-center gap-1"
+              className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[11px] font-semibold text-amber-400 border border-zinc-700 flex items-center gap-1.5"
             >
-              <Download className="w-3 h-3" />
+              <span className="flex items-center gap-1 text-zinc-350">
+                <AppleStoreIcon className="w-3 h-3 text-zinc-200" />
+                <GooglePlayIcon className="w-3 h-3 text-zinc-200" />
+              </span>
               <span>{language === 'uk' ? 'Встановити' : 'Install'}</span>
             </button>
             <button

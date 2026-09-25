@@ -1,5 +1,6 @@
 import React from 'react';
-import { Smartphone, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
+import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
 import { useLanguage } from '../context/LanguageContext';
 
 interface CtaBannerProps {
@@ -38,12 +39,16 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
               <button
                 id="cta-open-pwa-btn"
-                onClick={onOpenWebApp}
-                className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-[0.98]"
+                onClick={() => (onOpenDownload ? onOpenDownload() : onOpenWebApp())}
+                className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center gap-3 active:scale-[0.98] group"
               >
-                <Smartphone className="w-5 h-5" />
+                <div className="flex items-center gap-1.5 bg-zinc-950/15 py-1 px-2.5 rounded-lg border border-zinc-950/20 shadow-sm shrink-0">
+                  <AppleStoreIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
+                  <span className="w-px h-3.5 bg-zinc-950/25" />
+                  <GooglePlayIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
+                </div>
                 <span>{t.cta.webAppBtn}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 

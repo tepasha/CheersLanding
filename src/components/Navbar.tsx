@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Smartphone, Link2, Globe, Heart } from 'lucide-react';
+import { Menu, X, Smartphone, Globe, Heart } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
   onOpenWebApp: () => void;
   onOpenDownload?: () => void;
-  onOpenTestLink: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, onOpenTestLink }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t, detectedLocation } = useLanguage();
@@ -104,16 +103,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
             </div>
 
             <button
-              id="nav-test-link-btn"
-              onClick={onOpenTestLink}
-              className="px-3.5 py-2 rounded-xl text-xs font-semibold text-amber-300 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all duration-200 flex items-center gap-1.5 shadow-sm"
-              title={t.nav.testLink}
-            >
-              <Link2 className="w-3.5 h-3.5 text-amber-400" />
-              <span>{t.nav.testLink}</span>
-            </button>
-
-            <button
               id="nav-webapp-btn"
               onClick={onOpenWebApp}
               className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all duration-200 flex items-center gap-1.5 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 active:scale-[0.98]"
@@ -136,14 +125,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
               <span>{language.toUpperCase()}</span>
             </button>
 
-            <button
-              id="nav-mobile-test-quick"
-              onClick={onOpenTestLink}
-              className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center gap-1"
-            >
-              <Link2 className="w-3 h-3" />
-              <span>{language === 'uk' ? 'Тест' : 'Test'}</span>
-            </button>
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -201,16 +182,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload, on
           </div>
 
           <div className="pt-4 border-t border-zinc-800 flex flex-col gap-2.5">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenTestLink();
-              }}
-              className="w-full py-2.5 rounded-xl font-semibold text-sm bg-amber-500/15 border border-amber-500/30 text-amber-300 flex items-center justify-center gap-2"
-            >
-              <Link2 className="w-4 h-4 text-amber-400" />
-              <span>{t.nav.testLink}</span>
-            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

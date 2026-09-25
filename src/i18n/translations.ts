@@ -9,7 +9,6 @@ export interface TranslationSchema {
     safety: string;
     toasts: string;
     faq: string;
-    testLink: string;
     webApp: string;
     downloadApp: string;
     onlineBadge: string;
@@ -172,17 +171,6 @@ export interface TranslationSchema {
     orDownload: string;
     openInNewTab: string;
   };
-  testLinkModal: {
-    title: string;
-    subtitle: string;
-    directUrlLabel: string;
-    copyBtn: string;
-    copiedBtn: string;
-    openBtn: string;
-    scanQrLabel: string;
-    scanQrDesc: string;
-    deviceOptimized: string;
-  };
   legalModal: {
     privacyTitle: string;
     termsTitle: string;
@@ -206,7 +194,6 @@ export const translations: Record<Language, TranslationSchema> = {
       safety: 'Безпека',
       toasts: 'Тости',
       faq: 'FAQ',
-      testLink: 'Тестове посилання',
       webApp: 'Web App',
       downloadApp: 'Завантажити',
       onlineBadge: 'Онлайн у твоєму місті',
@@ -323,7 +310,7 @@ export const translations: Record<Language, TranslationSchema> = {
       badge: 'Почни вечір яскраво',
       title: 'Готовий до нових знайомств уже сьогодні?',
       subtitle: 'Відкрий додаток, обери напій і знаходь однодумців за лічені хвилини.',
-      webAppBtn: 'Відкрити Web-версію',
+      webAppBtn: 'Встановити',
       downloadBtn: 'Завантажити додаток',
       guarantee: '100% безкоштовно • Без спаму • Тільки реальні люди поруч',
     },
@@ -348,7 +335,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     downloadModal: {
       title: 'Завантажити «Будьмо!»',
-      subtitle: 'Завантажуйте виключно через офіційні магазини додатків Apple App Store та Google Play.',
+      subtitle: 'Завантажуйте виключно через офіційні магазини додатків\nApple App Store та Google Play.',
       quickAccessBadge: 'Швидкий перехід',
       scanQrTitle: 'Наведи камеру смартфона',
       scanQrDesc: 'Відкриває офіційну сторінку завантаження у відповідному магазині вашого смартфона.',
@@ -368,17 +355,6 @@ export const translations: Record<Language, TranslationSchema> = {
       closeBtn: 'Закрити',
       orDownload: 'Або завантажте рідний додаток для вашого смартфона',
       openInNewTab: 'Відкрити на весь екран',
-    },
-    testLinkModal: {
-      title: 'Тестове посилання',
-      subtitle: 'Використовуй це пряме посилання для тестування веб-версії додатку на будь-якому смартфоні чи планшеті.',
-      directUrlLabel: 'Пряма адреса додатку:',
-      copyBtn: 'Копіювати лінк',
-      copiedBtn: 'Скопійовано ✓',
-      openBtn: 'Відкрити в новій вкладці',
-      scanQrLabel: 'Відскануй QR-код телефоном',
-      scanQrDesc: 'Відкрий камеру iPhone чи Android для миттєвого переходу.',
-      deviceOptimized: 'Оптимізовано для Safari iOS, Google Chrome та Android WebView',
     },
     legalModal: {
       privacyTitle: 'Політика конфіденційності',
@@ -402,7 +378,6 @@ export const translations: Record<Language, TranslationSchema> = {
       safety: 'Safety',
       toasts: 'Toasts',
       faq: 'FAQ',
-      testLink: 'Test Link',
       webApp: 'Web App',
       downloadApp: 'Download',
       onlineBadge: 'Online in your city',
@@ -412,7 +387,7 @@ export const translations: Record<Language, TranslationSchema> = {
       headlineHighlight: 'in 2 minutes',
       headlinePart2: 'in your neighborhood',
       subtitle: 'From specialty coffee to craft beer around the corner. Real people nearby, shared vibes, and genuine live cheers without endless texting.',
-      tryWebBtn: 'Launch Web Version',
+      tryWebBtn: 'Install',
       downloadBtn: 'Download App',
       radarTitle: 'Live Radar',
       filterAll: 'All',
@@ -519,7 +494,7 @@ export const translations: Record<Language, TranslationSchema> = {
       badge: 'Kick Off Your Evening',
       title: 'Ready for Great Company Tonight?',
       subtitle: 'Open the app, pick your favorite drink, and find friendly people nearby in minutes.',
-      webAppBtn: 'Open Web App',
+      webAppBtn: 'Install',
       downloadBtn: 'Download the App',
       guarantee: '100% Free • No Spam • Real Verified People Nearby',
     },
@@ -544,7 +519,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     downloadModal: {
       title: 'Download Budmo!',
-      subtitle: 'Download exclusively via official app stores: Apple App Store & Google Play.',
+      subtitle: 'Download exclusively via official app stores\nApple App Store & Google Play.',
       quickAccessBadge: 'Quick Access',
       scanQrTitle: 'Point your phone camera',
       scanQrDesc: 'Opens the official store page directly on your smartphone.',
@@ -564,17 +539,6 @@ export const translations: Record<Language, TranslationSchema> = {
       closeBtn: 'Close',
       orDownload: 'Or download the native mobile app for your smartphone',
       openInNewTab: 'Open Fullscreen',
-    },
-    testLinkModal: {
-      title: 'Test Link',
-      subtitle: 'Use this direct URL to test the web application on any smartphone or tablet.',
-      directUrlLabel: 'Direct Application URL:',
-      copyBtn: 'Copy Link',
-      copiedBtn: 'Copied ✓',
-      openBtn: 'Open in New Tab',
-      scanQrLabel: 'Scan QR Code with Phone',
-      scanQrDesc: 'Open your iPhone or Android camera to launch instantly.',
-      deviceOptimized: 'Optimized for Safari iOS, Google Chrome, and Android WebView',
     },
     legalModal: {
       privacyTitle: 'Privacy Policy',

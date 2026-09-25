@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, ExternalLink, ShieldCheck } from 'lucide-react';
+import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
 import { useLanguage } from '../context/LanguageContext';
 
 interface DownloadModalProps {
@@ -44,7 +45,7 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
           <h3 className="text-2xl font-bold font-display tracking-tight text-white mb-1">
             {t.downloadModal.title}
           </h3>
-          <p className="text-xs sm:text-sm text-zinc-400">
+          <p className="text-xs sm:text-sm text-zinc-400 whitespace-pre-line leading-relaxed">
             {t.downloadModal.subtitle}
           </p>
         </div>
@@ -80,7 +81,9 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
             className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-amber-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md"
           >
             <div className="flex items-center gap-3.5">
-              <span className="text-3xl group-hover:scale-110 transition-transform"></span>
+              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <AppleStoreIcon className="w-6 h-6 text-white" />
+              </div>
               <div className="text-left">
                 <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">{t.downloadModal.officialStoreBadge}</p>
                 <p className="text-base font-bold text-white">{t.downloadModal.appleTitle}</p>
@@ -99,7 +102,9 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
             className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-emerald-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md"
           >
             <div className="flex items-center gap-3.5">
-              <span className="text-emerald-400 text-2xl font-bold group-hover:scale-110 transition-transform">▶</span>
+              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <GooglePlayIcon className="w-5 h-5 text-emerald-400" />
+              </div>
               <div className="text-left">
                 <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">{t.downloadModal.officialStoreBadge}</p>
                 <p className="text-base font-bold text-white">{t.downloadModal.googleTitle}</p>

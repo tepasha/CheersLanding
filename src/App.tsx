@@ -11,12 +11,10 @@ import { Footer } from './components/Footer';
 import { WebAppModal } from './components/WebAppModal';
 import { DownloadModal } from './components/DownloadModal';
 import { LegalModal } from './components/LegalModal';
-import { TestLinkModal } from './components/TestLinkModal';
 
 export default function App() {
   const [webAppModalOpen, setWebAppModalOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
-  const [testLinkModalOpen, setTestLinkModalOpen] = useState(false);
   const [downloadPlatform, setDownloadPlatform] = useState<string | undefined>();
   const [legalModalState, setLegalModalState] = useState<{
     isOpen: boolean;
@@ -46,7 +44,6 @@ export default function App() {
       <Navbar
         onOpenWebApp={() => setWebAppModalOpen(true)}
         onOpenDownload={() => handleOpenDownload()}
-        onOpenTestLink={() => setTestLinkModalOpen(true)}
       />
 
       {/* Main Content Sections */}
@@ -55,7 +52,6 @@ export default function App() {
         <Hero
           onOpenWebApp={() => setWebAppModalOpen(true)}
           onOpenDownload={handleOpenDownload}
-          onOpenTestLink={() => setTestLinkModalOpen(true)}
         />
 
         {/* 3. How It Works (3 Steps with Radius Slider & Drink Vibe Sandbox) */}
@@ -104,11 +100,6 @@ export default function App() {
         isOpen={legalModalState.isOpen}
         type={legalModalState.type}
         onClose={() => setLegalModalState((prev) => ({ ...prev, isOpen: false }))}
-      />
-
-      <TestLinkModal
-        isOpen={testLinkModalOpen}
-        onClose={() => setTestLinkModalOpen(false)}
       />
 
     </div>
