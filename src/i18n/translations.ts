@@ -182,6 +182,23 @@ export interface TranslationSchema {
     defaultEnDetected: string;
     switchLangTooltip: string;
   };
+  inDevelopment: {
+    badge: string;
+    title: string;
+    titleOops: string;
+    titleInDev: string;
+    titleSupport: string;
+    desc: string;
+    supportBtn: string;
+    supportDevPlatform: string;
+    backHomeBtn: string;
+    openWebAppBtn: string;
+    chosenStoreGoogle: string;
+    chosenStoreApple: string;
+    chosenStoreGeneric: string;
+    whySupportTitle: string;
+    whySupportDesc: string;
+  };
 }
 
 export const translations: Record<Language, TranslationSchema> = {
@@ -367,6 +384,23 @@ export const translations: Record<Language, TranslationSchema> = {
       defaultEnDetected: 'Location outside UA or unknown — English (EN) default',
       switchLangTooltip: 'Змінити мову / Switch language',
     },
+    inDevelopment: {
+      badge: 'Скоро у маркетах',
+      title: 'Oooops, поки що в розробці але ви можете підтримати розробника',
+      titleOops: 'Oooops',
+      titleInDev: 'поки що в розробці',
+      titleSupport: 'ви можете підтримати розробника',
+      desc: 'Мобільні додатки для Google Play та Apple App Store перебувають на етапі активної розробки та підготовки до релізу. А поки що ви можете користуватися нашою повноцінною Web-версією без встановлення!',
+      supportBtn: 'Підтримати розробника',
+      supportDevPlatform: 'через Donatello',
+      backHomeBtn: 'Повернутися на головну',
+      openWebAppBtn: 'Відкрити Web App',
+      chosenStoreGoogle: 'Google Play Store (Android)',
+      chosenStoreApple: 'Apple App Store (iOS)',
+      chosenStoreGeneric: 'Офіційні маркети додатків',
+      whySupportTitle: 'На що йде підтримка?',
+      whySupportDesc: 'Оплата акаунтів розробника Apple Developer & Google Play Console, хмарна база даних та кава для автора проєкту.',
+    },
   },
 
   en: {
@@ -550,6 +584,23 @@ export const translations: Record<Language, TranslationSchema> = {
       uaDetected: 'Location detected: Ukraine 🇺🇦 (UA)',
       defaultEnDetected: 'Location outside UA or unknown — English (EN) default',
       switchLangTooltip: 'Switch language / Змінити мову',
+    },
+    inDevelopment: {
+      badge: 'Coming Soon to App Stores',
+      title: 'Oooops, still in development but you can support the developer',
+      titleOops: 'Oooops',
+      titleInDev: 'still in development',
+      titleSupport: 'you can support the developer',
+      desc: 'Mobile apps for Google Play and Apple App Store are actively in development. In the meantime, you can enjoy our full-featured Web App directly in your browser!',
+      supportBtn: 'Підтримати розробника',
+      supportDevPlatform: 'via Donatello',
+      backHomeBtn: 'Back to Home',
+      openWebAppBtn: 'Open Web App',
+      chosenStoreGoogle: 'Google Play Store (Android)',
+      chosenStoreApple: 'Apple App Store (iOS)',
+      chosenStoreGeneric: 'Official App Stores',
+      whySupportTitle: 'How your support helps?',
+      whySupportDesc: 'Covers Apple Developer & Google Play Console licenses, cloud hosting, and coffee for the builder.',
     },
   },
 };

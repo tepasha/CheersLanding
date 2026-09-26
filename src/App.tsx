@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
@@ -11,8 +11,20 @@ import { Footer } from './components/Footer';
 import { WebAppModal } from './components/WebAppModal';
 import { DownloadModal } from './components/DownloadModal';
 import { LegalModal } from './components/LegalModal';
+import { InDevelopmentPage } from './components/InDevelopmentPage';
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'in-development'>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#in-development' || hash === '#under-development') {
+        return 'in-development';
+      }
+    }
+    return 'home';
+  });
+
+  const [selectedStore, setSelectedStore] = useState<'google' | 'apple' | null>(null);
   const [webAppModalOpen, setWebAppModalOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [downloadPlatform, setDownloadPlatform] = useState<string | undefined>();
@@ -24,9 +36,39 @@ export default function App() {
     type: 'privacy',
   });
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#in-development' || hash === '#under-development') {
+        setCurrentPage('in-development');
+      } else if (!hash || hash === '#' || hash.startsWith('#how-it-works') || hash.startsWith('#features') || hash.startsWith('#safety') || hash.startsWith('#faq')) {
+        setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const handleOpenDownload = (platform?: string) => {
     setDownloadPlatform(platform);
     setDownloadModalOpen(true);
+  };
+
+  const handleSelectStore = (store: 'google' | 'apple') => {
+    setSelectedStore(store);
+    setDownloadModalOpen(false);
+    setCurrentPage('in-development');
+    window.location.hash = '#in-development';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackHome = () => {
+    setCurrentPage('home');
+    if (window.location.hash === '#in-development' || window.location.hash === '#under-development') {
+      history.pushState(null, '', window.location.pathname);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOpenPrivacy = () => {
@@ -36,6 +78,35 @@ export default function App() {
   const handleOpenTerms = () => {
     setLegalModalState({ isOpen: true, type: 'terms' });
   };
+
+  if (currentPage === 'in-development') {
+    return (
+      <>
+        <InDevelopmentPage
+          selectedStore={selectedStore}
+          onBackHome={handleBackHome}
+          onOpenWebApp={() => setWebAppModalOpen(true)}
+        />
+
+        {/* Web App Modal */}
+        <WebAppModal
+          isOpen={webAppModalOpen}
+          onClose={() => setWebAppModalOpen(false)}
+          onOpenDownload={() => {
+            setWebAppModalOpen(false);
+            handleOpenDownload();
+          }}
+        />
+
+        {/* Legal Modal */}
+        <LegalModal
+          isOpen={legalModalState.isOpen}
+          type={legalModalState.type}
+          onClose={() => setLegalModalState((prev) => ({ ...prev, isOpen: false }))}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-zinc-100 selection:bg-amber-500/30 selection:text-amber-200">
@@ -94,6 +165,7 @@ export default function App() {
         isOpen={downloadModalOpen}
         onClose={() => setDownloadModalOpen(false)}
         defaultPlatform={downloadPlatform}
+        onSelectStore={handleSelectStore}
       />
 
       <LegalModal

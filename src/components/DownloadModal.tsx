@@ -7,9 +7,10 @@ interface DownloadModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultPlatform?: string;
+  onSelectStore?: (store: 'google' | 'apple') => void;
 }
 
-export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose }) => {
+export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose, onSelectStore }) => {
   const { t } = useLanguage();
   const [currentUrl, setCurrentUrl] = useState('');
 
@@ -74,32 +75,13 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
 
         {/* Official Store Buttons */}
         <div className="space-y-3 mb-6">
-          <a
-            href="https://apple.com/app-store"
-            target="_blank"
-            rel="noreferrer"
-            className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-amber-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md"
-          >
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                <AppleStoreIcon className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-left">
-                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">{t.downloadModal.officialStoreBadge}</p>
-                <p className="text-base font-bold text-white">{t.downloadModal.appleTitle}</p>
-              </div>
-            </div>
-            <span className="text-xs text-amber-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
-              <span>{t.downloadModal.downloadAction}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </span>
-          </a>
-
-          <a
-            href="https://play.google.com"
-            target="_blank"
-            rel="noreferrer"
-            className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-emerald-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md"
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              onSelectStore?.('google');
+            }}
+            className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-emerald-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md text-left cursor-pointer active:scale-[0.99]"
           >
             <div className="flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -114,7 +96,30 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
               <span>{t.downloadModal.downloadAction}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </span>
-          </a>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              onSelectStore?.('apple');
+            }}
+            className="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-750 hover:border-amber-500/50 hover:bg-zinc-850 transition-all flex items-center justify-between group shadow-md text-left cursor-pointer active:scale-[0.99]"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <AppleStoreIcon className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-left">
+                <p className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">{t.downloadModal.officialStoreBadge}</p>
+                <p className="text-base font-bold text-white">{t.downloadModal.appleTitle}</p>
+              </div>
+            </div>
+            <span className="text-xs text-amber-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+              <span>{t.downloadModal.downloadAction}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </span>
+          </button>
         </div>
 
         {/* Security verification notice */}
