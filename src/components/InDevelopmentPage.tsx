@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Heart, ExternalLink, Smartphone, Sparkles, Coffee } from 'lucide-react';
+import { ArrowLeft, Heart, ExternalLink, Smartphone, Sparkles, Coffee, Globe } from 'lucide-react';
 import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -48,12 +48,44 @@ export const InDevelopmentPage: React.FC<InDevelopmentPageProps> = ({
 
           {/* Right actions: Language toggle + Web App */}
           <div className="flex items-center gap-2.5">
-            <button
-              onClick={() => setLanguage(language === 'uk' ? 'en' : 'uk')}
-              className="px-2.5 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors"
+            {/* Desktop Language Switcher Pill (same as Navbar) */}
+            <div 
+              className="hidden sm:flex items-center bg-zinc-900/90 border border-zinc-700/80 rounded-xl p-0.5 text-xs mr-1 shadow-inner"
               title={t.geoBadge.switchLangTooltip}
             >
-              {language === 'uk' ? '🇺🇦 UA' : '🇬🇧 EN'}
+              <button
+                type="button"
+                onClick={() => setLanguage('uk')}
+                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
+                  language === 'uk'
+                    ? 'bg-amber-500 text-zinc-950 shadow-sm'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                UA 🇺🇦
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
+                  language === 'en'
+                    ? 'bg-amber-500 text-zinc-950 shadow-sm'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                EN 🇬🇧
+              </button>
+            </div>
+
+            {/* Mobile Language Switcher (same as Navbar) */}
+            <button
+              type="button"
+              onClick={() => setLanguage(language === 'uk' ? 'en' : 'uk')}
+              className="flex sm:hidden px-2 py-1.5 rounded-lg text-xs font-bold bg-zinc-900 border border-zinc-700 text-zinc-200 items-center gap-1 cursor-pointer"
+              title={t.geoBadge.switchLangTooltip}
+            >
+              <Globe className="w-3 h-3 text-amber-400" />
+              <span>{language.toUpperCase()}</span>
             </button>
 
             <button
