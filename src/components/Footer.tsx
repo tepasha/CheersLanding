@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, FileText, ArrowUp, Smartphone, Heart, ExternalLink } from 'lucide-react';
+import { Shield, FileText, ArrowUp, Smartphone, Heart, ExternalLink, Headphones } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
@@ -109,6 +109,18 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a href="#safety" className="hover:text-amber-400 transition-colors">
                   {t.footer.manifesto}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://t.me/cheers_support_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
+                >
+                  <Headphones className="w-3.5 h-3.5 text-sky-400" />
+                  <span>{t.footer.techSupport}</span>
+                  <ExternalLink className="w-3 h-3 text-zinc-500" />
                 </a>
               </li>
             </ul>

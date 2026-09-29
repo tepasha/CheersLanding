@@ -21,30 +21,36 @@ export const SupportSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           
-          {/* Пункт 1: Плашка "Тех підтримка" (без посилання) */}
-          <div className="px-4 py-3 sm:py-3.5 rounded-2xl bg-zinc-900/80 border border-zinc-800/80 flex items-center justify-between gap-3 shadow-md shadow-black/30 hover:border-zinc-700/80 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0">
+          {/* Пункт 1: Плашка "Тех підтримка" з посиланням на Telegram бот */}
+          <a
+            href="https://t.me/cheers_support_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group px-4 py-3 sm:py-3.5 rounded-2xl bg-zinc-900/80 hover:bg-zinc-900 border border-zinc-800/80 hover:border-sky-500/50 flex items-center justify-between gap-3 shadow-md shadow-black/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 group-hover:scale-105 group-hover:bg-sky-500/20 transition-all">
                 <TelegramIcon className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-white tracking-tight">
+                  <span className="text-sm font-semibold text-white group-hover:text-sky-300 tracking-tight transition-colors">
                     {t.footer.techSupport}
                   </span>
                   <span className="px-1.5 py-0.5 text-[9px] font-medium rounded-full bg-zinc-800 text-sky-400 border border-zinc-700/50">
                     Telegram
                   </span>
+                  <ExternalLink className="w-3.5 h-3.5 text-sky-400/70 shrink-0 group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <p className="text-zinc-500 text-[11px] leading-tight mt-0.5">
                   {t.footer.techSupportDesc}
                 </p>
               </div>
             </div>
-            <div className="shrink-0 text-[11px] text-zinc-500 hidden sm:block bg-zinc-800/60 px-2 py-0.5 rounded-md border border-zinc-700/40">
-              @support
+            <div className="shrink-0 text-[11px] text-sky-400 font-medium group-hover:text-sky-300 bg-sky-500/10 group-hover:bg-sky-500/20 px-2.5 py-1 rounded-lg border border-sky-500/20 transition-all">
+              @cheers_support_bot
             </div>
-          </div>
+          </a>
 
           {/* Пункт 2: Окремий пункт "Підтримати розробника" (з посиланням) */}
           <a
