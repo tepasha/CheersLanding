@@ -13,7 +13,8 @@ import {
   Minus,
   Map as MapIcon,
   Crosshair,
-  Smartphone
+  Smartphone,
+  Download
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
@@ -21,7 +22,7 @@ import { playGlassClink } from '../utils/audio';
 import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
-  onOpenWebApp: () => void;
+  onOpenWebApp?: () => void;
   onOpenDownload?: (platform?: string) => void;
 }
 
@@ -92,28 +93,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
               {t.hero.subtitle}
             </p>
 
-            {/* Action CTA Buttons */}
+            {/* Action CTA Button */}
             <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
               <button
-                id="hero-open-pwa-btn"
-                onClick={() => (onOpenDownload ? onOpenDownload() : onOpenWebApp())}
-                className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-3 group active:scale-[0.98]"
+                id="hero-download-app-btn"
+                onClick={() => onOpenDownload?.()}
+                className="px-8 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-3 group active:scale-[0.98]"
               >
-                <span>{t.hero.tryWebBtn}</span>
+                <Download className="w-5 h-5 text-zinc-950 group-hover:scale-110 transition-transform" />
+                <span>{t.hero.downloadBtn}</span>
                 <div className="flex items-center gap-1.5 bg-zinc-950/15 py-1 px-2.5 rounded-lg border border-zinc-950/20 shadow-sm shrink-0">
                   <AppleStoreIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
                   <span className="w-px h-3.5 bg-zinc-950/25" />
                   <GooglePlayIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
                 </div>
-              </button>
-
-              <button
-                id="hero-open-webapp-btn"
-                onClick={onOpenWebApp}
-                className="px-6 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-2.5 group active:scale-[0.98]"
-              >
-                <Smartphone className="w-5 h-5 text-zinc-950 group-hover:scale-110 transition-transform" />
-                <span>Web App</span>
               </button>
             </div>
 

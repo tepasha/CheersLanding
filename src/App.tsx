@@ -42,10 +42,17 @@ export default function App() {
       const hash = window.location.hash.toLowerCase();
       if (hash === '#in-development' || hash === '#under-development') {
         setCurrentPage('in-development');
-      } else if (!hash || hash === '#' || hash.startsWith('#how-it-works') || hash.startsWith('#features') || hash.startsWith('#safety') || hash.startsWith('#faq')) {
+      } else if (hash === '#test' || hash === '#webapp' || hash === '#demo') {
+        setWebAppModalOpen(true);
+      } else if (!hash || hash === '#' || hash.startsWith('#how-it-works') || hash.startsWith('#manifesto') || hash.startsWith('#features') || hash.startsWith('#safety') || hash.startsWith('#faq')) {
         setCurrentPage('home');
       }
     };
+
+    const initialHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase() : '';
+    if (initialHash === '#test' || initialHash === '#webapp' || initialHash === '#demo') {
+      setWebAppModalOpen(true);
+    }
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -114,7 +121,6 @@ export default function App() {
       
       {/* 1. Sticky Navigation Bar */}
       <Navbar
-        onOpenWebApp={() => setWebAppModalOpen(true)}
         onOpenDownload={() => handleOpenDownload()}
       />
 
@@ -122,7 +128,6 @@ export default function App() {
       <main>
         {/* 2. Hero Section with Interactive Geo-Radar Phone Mockup */}
         <Hero
-          onOpenWebApp={() => setWebAppModalOpen(true)}
           onOpenDownload={handleOpenDownload}
         />
 
@@ -143,7 +148,6 @@ export default function App() {
 
         {/* 8. Conversion Booster Call-to-Action Banner */}
         <CtaBanner
-          onOpenWebApp={() => setWebAppModalOpen(true)}
           onOpenDownload={handleOpenDownload}
         />
       </main>
@@ -155,7 +159,7 @@ export default function App() {
       <Footer
         onOpenPrivacy={handleOpenPrivacy}
         onOpenTerms={handleOpenTerms}
-        onOpenWebApp={() => setWebAppModalOpen(true)}
+        onOpenDownload={() => handleOpenDownload()}
       />
 
       {/* Interactive Modals */}

@@ -6,13 +6,12 @@ import { useLanguage } from '../context/LanguageContext';
 interface InDevelopmentPageProps {
   selectedStore?: 'google' | 'apple' | string | null;
   onBackHome: () => void;
-  onOpenWebApp: () => void;
+  onOpenWebApp?: () => void;
 }
 
 export const InDevelopmentPage: React.FC<InDevelopmentPageProps> = ({
   selectedStore,
   onBackHome,
-  onOpenWebApp,
 }) => {
   const { t, language, setLanguage } = useLanguage();
 
@@ -86,14 +85,6 @@ export const InDevelopmentPage: React.FC<InDevelopmentPageProps> = ({
             >
               <Globe className="w-3 h-3 text-amber-400" />
               <span>{language.toUpperCase()}</span>
-            </button>
-
-            <button
-              onClick={onOpenWebApp}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 text-zinc-950 text-xs font-bold shadow-md shadow-amber-500/20 hover:from-amber-300 hover:to-yellow-300 transition-all active:scale-95"
-            >
-              <Smartphone className="w-3.5 h-3.5 text-zinc-950" />
-              <span>{t.inDevelopment.openWebAppBtn}</span>
             </button>
           </div>
 
@@ -178,14 +169,6 @@ export const InDevelopmentPage: React.FC<InDevelopmentPageProps> = ({
               <span>{t.inDevelopment.supportBtn}</span>
               <ExternalLink className="w-4 h-4 opacity-75 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
-
-            <button
-              onClick={onOpenWebApp}
-              className="w-full sm:w-auto px-6 py-4.5 rounded-2xl bg-zinc-900 border border-zinc-700 hover:border-amber-500/40 hover:bg-zinc-850 text-white font-bold text-base transition-all flex items-center justify-center gap-2.5 active:scale-[0.98]"
-            >
-              <Smartphone className="w-5 h-5 text-amber-400" />
-              <span>{t.inDevelopment.openWebAppBtn}</span>
-            </button>
           </div>
 
           {/* Why support card */}

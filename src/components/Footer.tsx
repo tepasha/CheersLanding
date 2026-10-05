@@ -1,17 +1,19 @@
 import React from 'react';
-import { Shield, FileText, ArrowUp, Smartphone, Heart, ExternalLink, Headphones } from 'lucide-react';
+import { Shield, FileText, ArrowUp, Download, Heart, ExternalLink, Headphones } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
   onOpenPrivacy: () => void;
   onOpenTerms: () => void;
-  onOpenWebApp: () => void;
+  onOpenWebApp?: () => void;
+  onOpenDownload?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenPrivacy,
   onOpenTerms,
   onOpenWebApp,
+  onOpenDownload,
 }) => {
   const { t } = useLanguage();
 
@@ -131,13 +133,15 @@ export const Footer: React.FC<FooterProps> = ({
             <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4 font-display">
               {t.footer.quickLaunchHeader}
             </h4>
-            <button
-              onClick={onOpenWebApp}
-              className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-amber-500/40 text-zinc-200 hover:text-white flex items-center gap-2 mb-3 text-xs font-semibold transition-colors"
-            >
-              <Smartphone className="w-3.5 h-3.5 text-amber-400" />
-              <span>{t.footer.pwaBtn}</span>
-            </button>
+            {onOpenDownload && (
+              <button
+                onClick={onOpenDownload}
+                className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-amber-500/40 text-zinc-200 hover:text-white flex items-center gap-2 mb-3 text-xs font-semibold transition-colors"
+              >
+                <Download className="w-3.5 h-3.5 text-amber-400" />
+                <span>{t.hero.downloadBtn}</span>
+              </button>
+            )}
             <button
               onClick={scrollToTop}
               className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors flex items-center gap-1 text-[11px]"

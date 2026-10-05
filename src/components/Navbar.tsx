@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Smartphone, Globe, Heart } from 'lucide-react';
+import { Menu, X, Globe, Heart, Download } from 'lucide-react';
 import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
 import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
-  onOpenWebApp: () => void;
+  onOpenWebApp?: () => void;
   onOpenDownload?: () => void;
 }
 
@@ -105,27 +105,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload }) 
 
             {onOpenDownload && (
               <button
-                id="nav-install-btn"
+                id="nav-download-btn"
                 onClick={onOpenDownload}
-                className="px-3 py-2 rounded-xl text-xs font-semibold text-zinc-300 hover:text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-750 hover:border-amber-500/40 transition-all duration-200 flex items-center gap-2 group shadow-sm"
-                title={t.hero.tryWebBtn}
+                className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all duration-200 flex items-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 active:scale-[0.98]"
               >
-                <span>{t.hero.tryWebBtn}</span>
-                <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100">
-                  <AppleStoreIcon className="w-3.5 h-3.5 text-zinc-300" />
-                  <GooglePlayIcon className="w-3.5 h-3.5 text-zinc-300" />
+                <Download className="w-3.5 h-3.5" />
+                <span>{t.hero.downloadBtn}</span>
+                <div className="flex items-center gap-1 opacity-90">
+                  <AppleStoreIcon className="w-3.5 h-3.5 text-zinc-950" />
+                  <GooglePlayIcon className="w-3.5 h-3.5 text-zinc-950" />
                 </div>
               </button>
             )}
-
-            <button
-              id="nav-webapp-btn"
-              onClick={onOpenWebApp}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all duration-200 flex items-center gap-1.5 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 active:scale-[0.98]"
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-              <span>{t.nav.webApp}</span>
-            </button>
           </div>
 
           {/* Mobile Action Controls */}
@@ -204,25 +195,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload }) 
                   setMobileMenuOpen(false);
                   onOpenDownload();
                 }}
-                className="w-full py-2.5 rounded-xl font-semibold text-sm bg-zinc-900 border border-zinc-750 text-zinc-200 hover:text-white flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 to-amber-500 text-zinc-950 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
               >
-                <span>{t.hero.tryWebBtn}</span>
-                <div className="flex items-center gap-1 opacity-80">
-                  <AppleStoreIcon className="w-3.5 h-3.5 text-zinc-300" />
-                  <GooglePlayIcon className="w-3.5 h-3.5 text-zinc-300" />
+                <Download className="w-4 h-4" />
+                <span>{t.hero.downloadBtn}</span>
+                <div className="flex items-center gap-1 opacity-90 ml-1">
+                  <AppleStoreIcon className="w-3.5 h-3.5 text-zinc-950" />
+                  <GooglePlayIcon className="w-3.5 h-3.5 text-zinc-950" />
                 </div>
               </button>
             )}
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenWebApp();
-              }}
-              className="w-full py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 to-amber-500 text-zinc-950 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
-            >
-              <Smartphone className="w-4 h-4" />
-              <span>{t.nav.webApp}</span>
-            </button>
             <a
               href="https://donatello.to/PavelTerekhov"
               target="_blank"
