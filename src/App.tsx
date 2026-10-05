@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { LiteraryDisclaimer } from './components/LiteraryDisclaimer';
 import { HowItWorks } from './components/HowItWorks';
 import { FeaturesShowcase } from './components/FeaturesShowcase';
 import { SafetySection } from './components/SafetySection';
@@ -124,6 +125,9 @@ export default function App() {
           onOpenWebApp={() => setWebAppModalOpen(true)}
           onOpenDownload={handleOpenDownload}
         />
+
+        {/* 2.5 Literary Disclaimer & Entertainment Manifesto */}
+        <LiteraryDisclaimer />
 
         {/* 3. How It Works (3 Steps with Radius Slider & Drink Vibe Sandbox) */}
         <HowItWorks />

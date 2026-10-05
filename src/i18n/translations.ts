@@ -42,6 +42,26 @@ export interface TranslationSchema {
       dmytroQuote: string;
     };
   };
+  literaryDisclaimer: {
+    badge: string;
+    titlePart1: string;
+    titleHighlight1: string;
+    titlePart2: string;
+    titleHighlight2: string;
+    subtitle: string;
+    openingQuote: string;
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    card1Title: string;
+    card1Desc: string;
+    card2Title: string;
+    card2Desc: string;
+    card3Title: string;
+    card3Desc: string;
+    authorQuote: string;
+    authorSign: string;
+  };
   howItWorks: {
     badge: string;
     title: string;
@@ -244,6 +264,26 @@ export const translations: Record<Language, TranslationSchema> = {
         dmytroQuote: '«Затишний бар, хто поруч?»',
       },
     },
+    literaryDisclaimer: {
+      badge: 'Маніфест щирого келиха',
+      titlePart1: 'Ані для ',
+      titleHighlight1: '«плотських утіх»',
+      titlePart2: ', ані для ',
+      titleHighlight2: '«будови сімʼї»',
+      subtitle: 'Тут шукають не долю на все життя і не скороминущих пригод, а натхненного співрозмовника на цей вечір.',
+      openingQuote: '«Будьмо!» — це не додаток для алькових таємниць і не шлюбне агентство для спільної іпотеки. Це простір виключно розважального настрою.',
+      paragraph1: 'Давайте начистоту, шановні пані та панове. Якщо ваші пальці звикли до гарячкового свайпання в пошуках нічних авантюр і скороминущих плотських утіх — облиште надії: ви помилилися адресою. Так само, якщо ви шукаєте тут супутника для побудови міцного осередку суспільства, вибору штор у вітальню та благословення на золоте весілля — видихайте, тут не шлюбне агентство.',
+      paragraph2: '«Будьмо!» створено для чистої радості людського спілкування. Це про живий сміх за барною стійкою, неочікувану суперечку про артхаусне кіно чи секрети заварювання крафтового стауту, випадковий тост, що розтоплює вечірню втому, і тепло щирого «Як твій день?». Тільки розвага, товариська іронія та легкість моменту.',
+      paragraph3: 'Жодних прихованих натяків, жодного матримоніального тиску й розбитих сердець. Лише відкриті люди в публічних закладах міста, які просто хочуть підняти келих або горнятко кави в хорошій компанії й усміхнутися.',
+      card1Title: 'Жодних плотських пригод',
+      card1Desc: 'Ми не Tinder і не альковний радар. Тут не колекціонують інтимні натяки — залиште це іншим застосункам.',
+      card2Title: 'Без планів на вінчання',
+      card2Desc: 'Ми не обтяжуємо вечір шлюбними клятвами, іпотеками чи пошуком долі. Жодної зайвої драми.',
+      card3Title: 'Суто розважальний настрій',
+      card3Desc: 'Легка розмова, дзвін келихів, душевні суперечки, міські байки та щире тепло тут і зараз.',
+      authorQuote: '«Найкращі історії трапляються тоді, коли ви нічого не вимагаєте від вечора, крім доброго жарту й щирого "Будьмо!" навпроти.»',
+      authorSign: 'Редакція «Будьмо!» • З любов’ю до живого слова',
+    },
     howItWorks: {
       badge: 'Просто як «Раз, Два, Три»',
       title: 'Як працює «Будьмо!»',
@@ -444,6 +484,26 @@ export const translations: Record<Language, TranslationSchema> = {
         dmytroStatus: 'Dmytro • Cocktails (380 m)',
         dmytroQuote: '«Cozy cocktail bar, who is around?»',
       },
+    },
+    literaryDisclaimer: {
+      badge: 'A Literary Disclaimer',
+      titlePart1: 'Neither for ',
+      titleHighlight1: '«carnal pleasures»',
+      titlePart2: ', nor for ',
+      titleHighlight2: '«building a family»',
+      subtitle: 'We seek neither a lifelong matrimonial vow nor fleeting nocturnal trysts, but an inspiring soul to share this very evening.',
+      openingQuote: '“Budmo!” is neither a clandestine boudoir directory nor a matrimonial matchmaking bureau for a joint 30-year mortgage. It is an arena of pure entertainment.',
+      paragraph1: 'Let us be candid, ladies and gentlemen. If your thumbs are accustomed to frantic swiping in search of nocturnal escapades and fleeting carnal pleasures — abandon all hope: you took a wrong turn down a blind alley. Likewise, if you seek a partner to build an unbreakable social pillar, pick parlor drapes, and meet the in-laws on a first date — exhale gently: this is neither a chapel nor a registry office.',
+      paragraph2: 'Budmo! exists for the undiluted joy of human conversation. It is about vibrant laughter across a pub counter, an impromptu debate over arthouse cinema or the secrets of dry-hopped IPAs, an unexpected toast that dissolves the day’s fatigue, and the genuine warmth of "How are you doing?". Pure amusement, witty banter, and the charm of the moment.',
+      paragraph3: 'No hidden agendas, no matrimonial pressure, no bruised hearts. Only friendly souls in welcoming neighborhood venues who simply wish to raise a glass or a cup of fresh brew in stellar company and share a smile.',
+      card1Title: 'No Carnal Pursuits',
+      card1Desc: 'We are not Tinder or a bedroom radar. Seduction games and nocturnal quests belong to other apps.',
+      card2Title: 'No Matrimonial Vows',
+      card2Desc: 'No expectations of wedding bells, joint mortgages, or domestic settling. Zero emotional baggage.',
+      card3Title: 'Pure Entertainment & Spirit',
+      card3Desc: 'Lighthearted conversations, clinking glasses, soulful debates, urban tales, and the sheer delight of here & now.',
+      authorQuote: '“The finest stories unfold when one expects nothing from the evening save for a witty remark and a hearty "Budmo!" across the table.”',
+      authorSign: 'The Budmo! Chronicle • Dedicated to the living word',
     },
     howItWorks: {
       badge: 'As simple as 1, 2, 3',
