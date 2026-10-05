@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ShieldCheck, Download } from 'lucide-react';
+import { Sparkles, ShieldCheck, Download, Heart, ExternalLink } from 'lucide-react';
 import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -35,12 +35,12 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
               {t.cta.subtitle}
             </p>
 
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-8 w-full sm:w-auto">
               <button
                 id="cta-download-btn"
                 onClick={() => onOpenDownload?.()}
-                className="px-8 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center gap-3 active:scale-[0.98] group"
+                className="px-7 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center gap-3 active:scale-[0.98] group"
               >
                 <Download className="w-5 h-5 text-zinc-950 group-hover:scale-110 transition-transform" />
                 <span>{t.cta.downloadBtn}</span>
@@ -50,6 +50,18 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenWebApp, onOpenDownlo
                   <GooglePlayIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
                 </div>
               </button>
+
+              <a
+                id="cta-support-dev-banner"
+                href="https://donatello.to/PavelTerekhov"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 rounded-xl text-base font-bold bg-zinc-900/90 hover:bg-zinc-850 border border-amber-500/40 hover:border-amber-400 text-amber-200 hover:text-white shadow-xl transition-all flex items-center justify-center gap-2.5 active:scale-[0.98] group"
+              >
+                <Heart className="w-5 h-5 fill-rose-500 text-rose-500 group-hover:scale-110 transition-transform" />
+                <span>{t.footer.supportDev}</span>
+                <ExternalLink className="w-4 h-4 opacity-75 group-hover:translate-x-0.5 transition-transform" />
+              </a>
             </div>
 
             {/* Badges */}

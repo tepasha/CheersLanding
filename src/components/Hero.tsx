@@ -14,7 +14,9 @@ import {
   Map as MapIcon,
   Crosshair,
   Smartphone,
-  Download
+  Download,
+  Heart,
+  ExternalLink
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { AppleStoreIcon, GooglePlayIcon } from './icons/StoreIcons';
@@ -93,12 +95,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
               {t.hero.subtitle}
             </p>
 
-            {/* Action CTA Button */}
+            {/* Action CTA Buttons */}
             <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
               <button
                 id="hero-download-app-btn"
                 onClick={() => onOpenDownload?.()}
-                className="px-8 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-3 group active:scale-[0.98]"
+                className="px-7 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-zinc-950 hover:from-amber-400 hover:to-yellow-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 flex items-center justify-center gap-3 group active:scale-[0.98]"
               >
                 <Download className="w-5 h-5 text-zinc-950 group-hover:scale-110 transition-transform" />
                 <span>{t.hero.downloadBtn}</span>
@@ -108,6 +110,30 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWebApp, onOpenDownload }) => {
                   <GooglePlayIcon className="w-4 h-4 text-zinc-950 group-hover:scale-110 transition-transform" />
                 </div>
               </button>
+
+              {/* Banner: "Підтримати розробника" */}
+              <a
+                id="hero-support-dev-banner"
+                href="https://donatello.to/PavelTerekhov"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-rose-500/15 via-amber-500/15 to-yellow-500/10 hover:from-rose-500/25 hover:to-amber-500/25 border border-amber-500/40 hover:border-amber-400 text-amber-200 hover:text-white shadow-xl shadow-black/40 transition-all duration-200 flex items-center justify-center sm:justify-start gap-3 group active:scale-[0.98]"
+              >
+                <div className="w-9 h-9 rounded-lg bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 group-hover:scale-110 group-hover:bg-rose-500/30 transition-all shrink-0">
+                  <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-bold text-amber-200 group-hover:text-white leading-tight">
+                      {t.footer.supportDev}
+                    </span>
+                    <ExternalLink className="w-3.5 h-3.5 text-amber-400/80 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                  <span className="text-[11px] text-zinc-400 group-hover:text-zinc-300 font-medium">
+                    через Donatello ☕️
+                  </span>
+                </div>
+              </a>
             </div>
 
           </div>

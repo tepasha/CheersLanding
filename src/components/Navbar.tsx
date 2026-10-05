@@ -117,6 +117,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWebApp, onOpenDownload }) 
                 </div>
               </button>
             )}
+
+            <a
+              id="nav-support-dev-btn"
+              href="https://donatello.to/PavelTerekhov"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex px-3 py-2 rounded-xl text-xs font-semibold text-amber-300 hover:text-white bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/60 transition-all duration-200 items-center gap-1.5 shadow-sm group"
+              title={t.footer.supportDev}
+            >
+              <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500 group-hover:scale-110 transition-transform" />
+              <span>{t.footer.supportDev}</span>
+            </a>
           </div>
 
           {/* Mobile Action Controls */}
